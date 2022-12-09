@@ -21,11 +21,14 @@
           + really want to dial in on the community here, whether its ultra-custom styling for them, new ways to communicate, etc
       - there's a classic <about> page
       - nouns.build also has [treasury & proposal sections](https://nouns.build/dao/0xd2e7684cf3e2511cc3b4538bb2885dc206583076/8) underneath daily auction
-      - [nouns.market provides a grid view of daily auction along with some financial info](https://noun.market/collections/0xdf9b7d26c8fc806b1ae6273684556761ff02d422)
+      - [nouns.market provides a grid view of daily auctiond along with some financial info](https://noun.market/collections/0xd2e7684cf3e2511cc3b4538bb2885dc206583076)
     - there's no subgraph (GQL indexer of contract events)
       - i'm on discord talking to someone I might be able to collab with on it but for now..
         - example of the most [important types in context of discord/twitter bot](https://github.com/ourzora/nouns-builder-bot/blob/main/src/messages/twitter.ts)
       - should've linked this earlier but [docs for smart contracts](https://docs.zora.co/docs/smart-contracts/nouns-builder/intro)
       
       
-## thats all for now, folks more to come
+### thats all for now, folks more to come
+
+
+## oh the gold standard is [https://github.com/ourzora/create-auction-house](https://github.com/ourzora/create-auction-house) this is a custom template for auction houses, we want same architecture
