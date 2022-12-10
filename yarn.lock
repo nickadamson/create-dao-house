@@ -92,6 +92,13 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@buildersdk/sdk@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@buildersdk/sdk/-/sdk-0.1.0.tgz#032b0a77e48d89c210a9912066228bdc1cb0696d"
+  integrity sha512-XF/DStcHD8WksjzCBH7RY1n3rw4YhdO6BNUbcmewD75jOwPec25Dds+NLwWQPWV6M6uTBJIClU4ks6/S2nwORw==
+  dependencies:
+    "@wagmi/core" "^0.7.5"
+
 "@coinbase/wallet-sdk@^3.5.3":
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/@coinbase/wallet-sdk/-/wallet-sdk-3.6.2.tgz#e8633001136e0236a746f6462c0dff2f881db343"
@@ -881,7 +888,7 @@
   resolved "https://registry.yarnpkg.com/@vanilla-extract/sprinkles/-/sprinkles-1.5.0.tgz#c921183ae518bb484299c2dc81f2acefd91c3dbe"
   integrity sha512-W58f2Rzz5lLmk0jbhgStVlZl5wEiPB1Ur3fRvUaBM+MrifZ3qskmFq/CiH//fEYeG5Dh9vF1qRviMMH46cX9Nw==
 
-"@wagmi/core@0.7.9":
+"@wagmi/core@0.7.9", "@wagmi/core@^0.7.5":
   version "0.7.9"
   resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-0.7.9.tgz#6ba054d8496e81b16b1c36a6faa6942233f4ecfb"
   integrity sha512-97KCELUP5Q1AagRyE7SmpLh4/v3xdcy/XMbybLvvtQbgmi3y5oEzy4h/wJMY1hEZlmicqyWZAHHm6xIr1tP5HA==
