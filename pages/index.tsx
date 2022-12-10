@@ -1,6 +1,13 @@
 import Head from 'next/head';
 
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
+
+import { Account } from '../components/Account';
+
 export default function Home() {
+  const { isConnected } = useAccount();
+
   return (
     <>
       <Head>
@@ -9,6 +16,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>its-our-house-house-house</div>
+      <ConnectButton />
+      {isConnected && <Account />}
     </>
   );
 }
