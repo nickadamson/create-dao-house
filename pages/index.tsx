@@ -46,11 +46,24 @@ export const getServerSideProps = async (): Promise<
   const provider = getDefaultProvider(
     process.env.NODE_ENV === 'development' ? 'goerli' : 'mainnet'
   );
-  const { auction } = BuilderSDK.connect({ signerOrProvider: provider });
+  const {
+    auction,
+    // governor, manager, token
+  } = BuilderSDK.connect({
+    signerOrProvider: provider,
+  });
+
   const { tokenId, highestBid, highestBidder, endTime, startTime } =
     await auction({
       address: auctionContract,
     }).auction();
+
+  // const {
+  //   metadataRenderer,
+  //   totalFounders,
+  //   totalSupply,
+  //   totalFounderOwnership,
+  // } = await token({ address: tokenContract });
 
   return {
     props: {
