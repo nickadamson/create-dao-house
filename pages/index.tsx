@@ -1,11 +1,26 @@
+import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
+import { getDefaultProvider } from 'ethers';
+import { Address, useAccount } from 'wagmi';
+import { BuilderSDK } from '@buildersdk/sdk';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount } from 'wagmi';
 
 import { Account } from '../components/Account';
+import Placeholder from '../components/Placeholder';
 
-export default function Home() {
+export const auctionContract = '0xBF6135CD28447A1eA5AeC9dA0d93BD41cB11FFc5';
+export const tokenContract = '0x5BFc9bFebdef34f0644F8028124CD363C8B8016d'; // public assembly testnet
+
+export type AuctionData = {
+  tokenId: string;
+  highestBid: string;
+  highestBidder: Address;
+  endTime: number;
+  startTime: number;
+};
+
+export default function Home({ auctionData }: { auctionData: AuctionData }) {
   const { isConnected } = useAccount();
 
   return (
@@ -18,6 +33,34 @@ export default function Home() {
       <div>its-our-house-house-house</div>
       <ConnectButton />
       {isConnected && <Account />}
+      <Placeholder auctionData={auctionData} />
     </>
   );
 }
+
+export const getServerSideProps = async (): Promise<
+  GetServerSidePropsResult<{
+    auctionData: any;
+  }>
+> => {
+  const provider = getDefaultProvider(
+    process.env.NODE_ENV === 'development' ? 'goerli' : 'mainnet'
+  );
+  const { auction } = BuilderSDK.connect({ signerOrProvider: provider });
+  const { tokenId, highestBid, highestBidder, endTime, startTime } =
+    await auction({
+      address: auctionContract,
+    }).auction();
+
+  return {
+    props: {
+      auctionData: {
+        tokenId: tokenId.toHexString(),
+        highestBid: highestBid.toHexString(),
+        highestBidder,
+        endTime,
+        startTime,
+      },
+    },
+  };
+};
