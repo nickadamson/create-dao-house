@@ -12,7 +12,7 @@ import Placeholder from '../components/Placeholder';
 export const auctionContract = '0xBF6135CD28447A1eA5AeC9dA0d93BD41cB11FFc5';
 export const tokenContract = '0x5BFc9bFebdef34f0644F8028124CD363C8B8016d'; // public assembly testnet
 
-export type AuctionData = {
+export interface AuctionData {
   tokenId: string;
   highestBid: string;
   highestBidder: Address;
