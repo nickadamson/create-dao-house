@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import NextHead from 'next/head';
 
-// web 3
 import { WagmiConfig } from 'wagmi';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, client } from '../providers/wagmi';
@@ -11,7 +10,6 @@ import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
-  // hydration errors
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
