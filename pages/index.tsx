@@ -9,16 +9,13 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Account } from '../components/Account';
 import Placeholder from '../components/Placeholder';
 
-export const auctionContract = '0xBF6135CD28447A1eA5AeC9dA0d93BD41cB11FFc5';
-export const tokenContract = '0x5BFc9bFebdef34f0644F8028124CD363C8B8016d'; // public assembly testnet
-
 export interface AuctionData {
   tokenId: string;
   highestBid: string;
   highestBidder: Address;
   endTime: number;
   startTime: number;
-};
+}
 
 export default function Home({ auctionData }: { auctionData: AuctionData }) {
   const { isConnected } = useAccount();
@@ -55,15 +52,8 @@ export const getServerSideProps = async (): Promise<
 
   const { tokenId, highestBid, highestBidder, endTime, startTime } =
     await auction({
-      address: auctionContract,
+      address: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS!,
     }).auction();
-
-  // const {
-  //   metadataRenderer,
-  //   totalFounders,
-  //   totalSupply,
-  //   totalFounderOwnership,
-  // } = await token({ address: tokenContract });
 
   return {
     props: {
