@@ -1,6 +1,25 @@
+import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 
-export default function Home() {
+import { getDefaultProvider } from 'ethers';
+import { Address, useAccount } from 'wagmi';
+import { BuilderSDK } from '@buildersdk/sdk';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+import { Account } from '../components/Account';
+import Placeholder from '../components/Placeholder';
+
+export interface AuctionData {
+  tokenId: string;
+  highestBid: string;
+  highestBidder: Address;
+  endTime: number;
+  startTime: number;
+}
+
+export default function Home({ auctionData }: { auctionData: AuctionData }) {
+  const { isConnected } = useAccount();
+
   return (
     <>
       <Head>
@@ -9,6 +28,42 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>its-our-house-house-house</div>
+      <ConnectButton />
+      {isConnected && <Account />}
+      <Placeholder auctionData={auctionData} />
     </>
   );
 }
+
+export const getServerSideProps = async (): Promise<
+  GetServerSidePropsResult<{
+    auctionData: any;
+  }>
+> => {
+  const provider = getDefaultProvider(
+    process.env.NODE_ENV === 'development' ? 'goerli' : 'mainnet'
+  );
+  const {
+    auction,
+    // governor, manager, token
+  } = BuilderSDK.connect({
+    signerOrProvider: provider,
+  });
+
+  const { tokenId, highestBid, highestBidder, endTime, startTime } =
+    await auction({
+      address: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS!,
+    }).auction();
+
+  return {
+    props: {
+      auctionData: {
+        tokenId: tokenId.toHexString(),
+        highestBid: highestBid.toHexString(),
+        highestBidder,
+        endTime,
+        startTime,
+      },
+    },
+  };
+};
