@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react';
-import AppProps from 'next/app';
-import NextHead from 'next/head';
+import type { AppProps } from 'next/app';
 import { WagmiConfig } from 'wagmi';
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, client } from '../providers/wagmi';
+
+import RootLayout from '../components/layouts/RootLayout';
 
 import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
+import AppStateProvider from '../providers/AppStateProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   return (
-    <>
-      <NextHead>
-        <title>My wagmi + RainbowKit App</title>
-      </NextHead>
+    <AppStateProvider>
       <WagmiConfig client={client}>
         <RainbowKitProvider chains={chains}>
-          {mounted && <Component {...pageProps} />}
+          <RootLayout>{mounted && <Component {...pageProps} />}</RootLayout>
         </RainbowKitProvider>
       </WagmiConfig>
-    </>
+    </AppStateProvider>
   );
 }
