@@ -1,9 +1,6 @@
 import { GetServerSidePropsResult, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
-
-import { getDefaultProvider } from 'ethers';
-import { Address, useAccount } from 'wagmi';
-import { BuilderSDK } from '@buildersdk/sdk';
+import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { Account } from '../components/Account';
