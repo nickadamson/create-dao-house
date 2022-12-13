@@ -103,11 +103,11 @@ const DAO_DETAILS_FRAGMENT = gql`
       contractImage
       rendererBase
     }
-      tokenContract {
+    tokenContract {
       id
-        name
-        symbol
-        totalSupply
+      name
+      symbol
+      totalSupply
       contractURI
     }
     treasuryContract {
@@ -161,7 +161,7 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     owner {
       id
     }
-      }
+  }
 `;
 
 const AUCTION_DETAILS_FRAGMENT = gql`
@@ -253,7 +253,7 @@ const GET_DAO_ADDRESSES = gql`
     dao(id: $addr) {
       ...DAOShort
     }
-      }
+  }
 
   ${DAO_SHORT_FRAGMENT}
 `;
@@ -288,6 +288,45 @@ export const getDAODetails = async (): Promise<DAODetails | undefined> => {
     );
 
     return dao;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export interface GovernanceDetails extends GovernorContract {
+  tokenContract: {
+    id: string;
+    name: string;
+  };
+}
+
+export const getGovernanceDetails = async (): Promise<
+  GovernanceDetails | undefined
+> => {
+  try {
+    const { dao }: { dao: DAOShort } = await request(
+      SUBGRAPH_URL,
+      GET_DAO_ADDRESSES,
+      {
+        addr: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}`,
+      }
+    );
+
+    try {
+      const { governorContract }: { governorContract: GovernorContract } =
+        await request(SUBGRAPH_URL, GET_GOVERNOR_DETAILS, {
+          addr: `${dao.governorContract.id}`,
+        });
+
+      const governanceDetails = {
+        ...governorContract,
+        tokenContract: { ...dao.tokenContract },
+      };
+
+      return governanceDetails;
+    } catch (error) {
+      console.log({ error });
+    }
   } catch (error) {
     console.log({ error });
   }
