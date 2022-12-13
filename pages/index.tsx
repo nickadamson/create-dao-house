@@ -5,6 +5,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { Account } from '../components/Account';
 import { getDaoInfo } from '../data/subgraph';
+import Navigation from '../components/Navigation';
 
 export interface DaoInfo {
   id: string;
@@ -31,6 +32,7 @@ export default function Home({ daoInfo }: { daoInfo: DaoInfo }) {
       </Head>
 
       <div className="font-bold underline">its-our-house-house-house</div>
+      <Navigation />
       <ConnectButton />
       {isConnected && <Account />}
     </>
