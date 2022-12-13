@@ -1,7 +1,59 @@
 import request, { gql } from 'graphql-request';
+import {
+  AuctionContract,
+  GovernorContract,
+  MetadataContract,
+  TokenContract,
+  TreasuryContract,
+} from './nouns-builder-graph-types';
 
 export const SUBGRAPH_URL =
   'https://api.thegraph.com/subgraphs/name/nickadamson/nouns-builder-mainnet';
+
+export type AuctionShort = Pick<
+  AuctionContract,
+  | 'id'
+  | 'duration'
+  | 'reservePrice'
+  | 'timeBuffer'
+  | 'minBidIncrement'
+  | 'paused'
+>;
+
+export type GovShort = Pick<
+  GovernorContract,
+  | 'id'
+  | 'vetoEnabled'
+  | 'vetoerAddress'
+  | 'proposalThreshold'
+  | 'quoromThreshold'
+  | 'votingDelay'
+  | 'votingPeriod'
+>;
+
+export type MetaShort = Pick<
+  MetadataContract,
+  'id' | 'description' | 'contractImage' | 'rendererBase'
+>;
+
+export type TokenShort = Pick<
+  TokenContract,
+  'id' | 'name' | 'symbol' | 'totalSupply' | 'contractURI'
+>;
+
+export type TreasuryShort = Pick<
+  TreasuryContract,
+  'id' | 'delay' | 'gracePeriod'
+>;
+
+export type DAOShort = {
+  id: string;
+  auctionContract: { id: string };
+  governorContract: { id: string };
+  metadataContract: { id: string };
+  tokenContract: { id: string; name: string };
+  treasuryContract: { id: string };
+};
 
 const DAO_SHORT_FRAGMENT = gql`
   fragment DAOShort on DAO {
