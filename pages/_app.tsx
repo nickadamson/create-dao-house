@@ -9,6 +9,7 @@ import RootLayout from '../components/layouts/RootLayout';
 
 import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
+import AppStateProvider from '../providers/AppStateProvider';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
@@ -18,12 +19,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <AppStateProvider>
       <WagmiConfig client={client}>
         <RainbowKitProvider chains={chains}>
           <RootLayout>{mounted && <Component {...pageProps} />}</RootLayout>
         </RainbowKitProvider>
       </WagmiConfig>
-    </>
+    </AppStateProvider>
   );
 }
