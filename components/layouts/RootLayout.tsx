@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import NextHead from 'next/head';
 import Navigation from '../Navigation';
+import Footer from '../Footer';
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       </NextHead>
       <Navigation />
       {children}
+      <Footer />
     </>
   );
 };
