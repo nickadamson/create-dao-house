@@ -1,8 +1,14 @@
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -26,7 +32,6 @@ export type Account = {
   votes: Array<Vote>;
 };
 
-
 export type AccountBidsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<AuctionBid_OrderBy>;
@@ -34,7 +39,6 @@ export type AccountBidsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AuctionBid_Filter>;
 };
-
 
 export type AccountDelegatedByArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -44,7 +48,6 @@ export type AccountDelegatedByArgs = {
   where?: InputMaybe<Delegation_Filter>;
 };
 
-
 export type AccountDelegationsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Delegation_OrderBy>;
@@ -52,7 +55,6 @@ export type AccountDelegationsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<Delegation_Filter>;
 };
-
 
 export type AccountSubmittedProposalsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -62,7 +64,6 @@ export type AccountSubmittedProposalsArgs = {
   where?: InputMaybe<Proposal_Filter>;
 };
 
-
 export type AccountTokensArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Token_OrderBy>;
@@ -70,7 +71,6 @@ export type AccountTokensArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<Token_Filter>;
 };
-
 
 export type AccountVotesArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -106,7 +106,7 @@ export enum Account_OrderBy {
   Id = 'id',
   SubmittedProposals = 'submittedProposals',
   Tokens = 'tokens',
-  Votes = 'votes'
+  Votes = 'votes',
 }
 
 export type Auction = {
@@ -117,10 +117,10 @@ export type Auction = {
   id: Scalars['ID'];
   settled: Scalars['Boolean'];
   startTime: Scalars['BigInt'];
-  token: Token;
+  token?: Maybe<Token>;
   winner?: Maybe<Account>;
+  winningBid?: Maybe<AuctionBid>;
 };
-
 
 export type AuctionBidsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -139,7 +139,6 @@ export type AuctionBid = {
   blockTimestamp: Scalars['BigInt'];
   extended: Scalars['Boolean'];
   id: Scalars['ID'];
-  transactionHash: Scalars['Bytes'];
 };
 
 export type AuctionBid_Filter = {
@@ -223,12 +222,6 @@ export type AuctionBid_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  transactionHash?: InputMaybe<Scalars['Bytes']>;
-  transactionHash_contains?: InputMaybe<Scalars['Bytes']>;
-  transactionHash_in?: InputMaybe<Array<Scalars['Bytes']>>;
-  transactionHash_not?: InputMaybe<Scalars['Bytes']>;
-  transactionHash_not_contains?: InputMaybe<Scalars['Bytes']>;
-  transactionHash_not_in?: InputMaybe<Array<Scalars['Bytes']>>;
 };
 
 export enum AuctionBid_OrderBy {
@@ -239,7 +232,6 @@ export enum AuctionBid_OrderBy {
   BlockTimestamp = 'blockTimestamp',
   Extended = 'extended',
   Id = 'id',
-  TransactionHash = 'transactionHash'
 }
 
 export type AuctionContract = {
@@ -252,8 +244,8 @@ export type AuctionContract = {
   paused: Scalars['Boolean'];
   reservePrice: Scalars['BigInt'];
   timeBuffer: Scalars['BigInt'];
+  tokenContract: TokenContract;
 };
-
 
 export type AuctionContractAuctionsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -332,6 +324,27 @@ export type AuctionContract_Filter = {
   timeBuffer_lte?: InputMaybe<Scalars['BigInt']>;
   timeBuffer_not?: InputMaybe<Scalars['BigInt']>;
   timeBuffer_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  tokenContract?: InputMaybe<Scalars['String']>;
+  tokenContract_?: InputMaybe<TokenContract_Filter>;
+  tokenContract_contains?: InputMaybe<Scalars['String']>;
+  tokenContract_contains_nocase?: InputMaybe<Scalars['String']>;
+  tokenContract_ends_with?: InputMaybe<Scalars['String']>;
+  tokenContract_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  tokenContract_gt?: InputMaybe<Scalars['String']>;
+  tokenContract_gte?: InputMaybe<Scalars['String']>;
+  tokenContract_in?: InputMaybe<Array<Scalars['String']>>;
+  tokenContract_lt?: InputMaybe<Scalars['String']>;
+  tokenContract_lte?: InputMaybe<Scalars['String']>;
+  tokenContract_not?: InputMaybe<Scalars['String']>;
+  tokenContract_not_contains?: InputMaybe<Scalars['String']>;
+  tokenContract_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  tokenContract_not_ends_with?: InputMaybe<Scalars['String']>;
+  tokenContract_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  tokenContract_not_in?: InputMaybe<Array<Scalars['String']>>;
+  tokenContract_not_starts_with?: InputMaybe<Scalars['String']>;
+  tokenContract_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  tokenContract_starts_with?: InputMaybe<Scalars['String']>;
+  tokenContract_starts_with_nocase?: InputMaybe<Scalars['String']>;
 };
 
 export enum AuctionContract_OrderBy {
@@ -342,7 +355,8 @@ export enum AuctionContract_OrderBy {
   MinBidIncrement = 'minBidIncrement',
   Paused = 'paused',
   ReservePrice = 'reservePrice',
-  TimeBuffer = 'timeBuffer'
+  TimeBuffer = 'timeBuffer',
+  TokenContract = 'tokenContract',
 }
 
 export type Auction_Filter = {
@@ -398,27 +412,7 @@ export type Auction_Filter = {
   startTime_lte?: InputMaybe<Scalars['BigInt']>;
   startTime_not?: InputMaybe<Scalars['BigInt']>;
   startTime_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  token?: InputMaybe<Scalars['String']>;
   token_?: InputMaybe<Token_Filter>;
-  token_contains?: InputMaybe<Scalars['String']>;
-  token_contains_nocase?: InputMaybe<Scalars['String']>;
-  token_ends_with?: InputMaybe<Scalars['String']>;
-  token_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  token_gt?: InputMaybe<Scalars['String']>;
-  token_gte?: InputMaybe<Scalars['String']>;
-  token_in?: InputMaybe<Array<Scalars['String']>>;
-  token_lt?: InputMaybe<Scalars['String']>;
-  token_lte?: InputMaybe<Scalars['String']>;
-  token_not?: InputMaybe<Scalars['String']>;
-  token_not_contains?: InputMaybe<Scalars['String']>;
-  token_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  token_not_ends_with?: InputMaybe<Scalars['String']>;
-  token_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  token_not_in?: InputMaybe<Array<Scalars['String']>>;
-  token_not_starts_with?: InputMaybe<Scalars['String']>;
-  token_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  token_starts_with?: InputMaybe<Scalars['String']>;
-  token_starts_with_nocase?: InputMaybe<Scalars['String']>;
   winner?: InputMaybe<Scalars['String']>;
   winner_?: InputMaybe<Account_Filter>;
   winner_contains?: InputMaybe<Scalars['String']>;
@@ -440,6 +434,27 @@ export type Auction_Filter = {
   winner_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
   winner_starts_with?: InputMaybe<Scalars['String']>;
   winner_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  winningBid?: InputMaybe<Scalars['String']>;
+  winningBid_?: InputMaybe<AuctionBid_Filter>;
+  winningBid_contains?: InputMaybe<Scalars['String']>;
+  winningBid_contains_nocase?: InputMaybe<Scalars['String']>;
+  winningBid_ends_with?: InputMaybe<Scalars['String']>;
+  winningBid_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  winningBid_gt?: InputMaybe<Scalars['String']>;
+  winningBid_gte?: InputMaybe<Scalars['String']>;
+  winningBid_in?: InputMaybe<Array<Scalars['String']>>;
+  winningBid_lt?: InputMaybe<Scalars['String']>;
+  winningBid_lte?: InputMaybe<Scalars['String']>;
+  winningBid_not?: InputMaybe<Scalars['String']>;
+  winningBid_not_contains?: InputMaybe<Scalars['String']>;
+  winningBid_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  winningBid_not_ends_with?: InputMaybe<Scalars['String']>;
+  winningBid_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  winningBid_not_in?: InputMaybe<Array<Scalars['String']>>;
+  winningBid_not_starts_with?: InputMaybe<Scalars['String']>;
+  winningBid_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  winningBid_starts_with?: InputMaybe<Scalars['String']>;
+  winningBid_starts_with_nocase?: InputMaybe<Scalars['String']>;
 };
 
 export enum Auction_OrderBy {
@@ -450,7 +465,8 @@ export enum Auction_OrderBy {
   Settled = 'settled',
   StartTime = 'startTime',
   Token = 'token',
-  Winner = 'winner'
+  Winner = 'winner',
+  WinningBid = 'winningBid',
 }
 
 export type BlockChangedFilter = {
@@ -497,7 +513,7 @@ export enum Dao_OrderBy {
   Id = 'id',
   MetadataContract = 'metadataContract',
   TokenContract = 'tokenContract',
-  TreasuryContract = 'treasuryContract'
+  TreasuryContract = 'treasuryContract',
 }
 
 export type Delegation = {
@@ -588,7 +604,7 @@ export enum Delegation_OrderBy {
   Dao = 'DAO',
   DelegatedTo = 'delegatedTo',
   Id = 'id',
-  Voter = 'voter'
+  Voter = 'voter',
 }
 
 export type FounderInfo = {
@@ -676,7 +692,7 @@ export enum FounderInfo_OrderBy {
   Id = 'id',
   OwnershipPercentage = 'ownershipPercentage',
   TokenContract = 'tokenContract',
-  VestExpiry = 'vestExpiry'
+  VestExpiry = 'vestExpiry',
 }
 
 export type GovernorContract = {
@@ -684,11 +700,20 @@ export type GovernorContract = {
   DAO: Dao;
   id: Scalars['ID'];
   proposalThreshold: Scalars['BigInt'];
+  proposals: Array<Proposal>;
   quoromThreshold: Scalars['BigInt'];
   vetoEnabled: Scalars['Boolean'];
   vetoerAddress: Scalars['Bytes'];
   votingDelay: Scalars['BigInt'];
   votingPeriod: Scalars['BigInt'];
+};
+
+export type GovernorContractProposalsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Proposal_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Proposal_Filter>;
 };
 
 export type GovernorContract_Filter = {
@@ -731,6 +756,7 @@ export type GovernorContract_Filter = {
   proposalThreshold_lte?: InputMaybe<Scalars['BigInt']>;
   proposalThreshold_not?: InputMaybe<Scalars['BigInt']>;
   proposalThreshold_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  proposals_?: InputMaybe<Proposal_Filter>;
   quoromThreshold?: InputMaybe<Scalars['BigInt']>;
   quoromThreshold_gt?: InputMaybe<Scalars['BigInt']>;
   quoromThreshold_gte?: InputMaybe<Scalars['BigInt']>;
@@ -771,11 +797,12 @@ export enum GovernorContract_OrderBy {
   Dao = 'DAO',
   Id = 'id',
   ProposalThreshold = 'proposalThreshold',
+  Proposals = 'proposals',
   QuoromThreshold = 'quoromThreshold',
   VetoEnabled = 'vetoEnabled',
   VetoerAddress = 'vetoerAddress',
   VotingDelay = 'votingDelay',
-  VotingPeriod = 'votingPeriod'
+  VotingPeriod = 'votingPeriod',
 }
 
 export type MetadataContract = {
@@ -784,8 +811,17 @@ export type MetadataContract = {
   contractImage: Scalars['String'];
   description: Scalars['String'];
   id: Scalars['ID'];
+  properties: Array<Property>;
   rendererBase: Scalars['String'];
   websiteURL: Scalars['String'];
+};
+
+export type MetadataContractPropertiesArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Property_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<Property_Filter>;
 };
 
 export type MetadataContract_Filter = {
@@ -860,6 +896,7 @@ export type MetadataContract_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  properties_?: InputMaybe<Property_Filter>;
   rendererBase?: InputMaybe<Scalars['String']>;
   rendererBase_contains?: InputMaybe<Scalars['String']>;
   rendererBase_contains_nocase?: InputMaybe<Scalars['String']>;
@@ -907,14 +944,82 @@ export enum MetadataContract_OrderBy {
   ContractImage = 'contractImage',
   Description = 'description',
   Id = 'id',
+  Properties = 'properties',
   RendererBase = 'rendererBase',
-  WebsiteUrl = 'websiteURL'
+  WebsiteUrl = 'websiteURL',
 }
 
 /** Defines the order direction, either ascending or descending */
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc'
+  Desc = 'desc',
+}
+
+export type Property = {
+  __typename?: 'Property';
+  id: Scalars['ID'];
+  metadataContract: MetadataContract;
+  name: Scalars['String'];
+};
+
+export type Property_Filter = {
+  /** Filter for the block changed event. */
+  _change_block?: InputMaybe<BlockChangedFilter>;
+  id?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  metadataContract?: InputMaybe<Scalars['String']>;
+  metadataContract_?: InputMaybe<MetadataContract_Filter>;
+  metadataContract_contains?: InputMaybe<Scalars['String']>;
+  metadataContract_contains_nocase?: InputMaybe<Scalars['String']>;
+  metadataContract_ends_with?: InputMaybe<Scalars['String']>;
+  metadataContract_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  metadataContract_gt?: InputMaybe<Scalars['String']>;
+  metadataContract_gte?: InputMaybe<Scalars['String']>;
+  metadataContract_in?: InputMaybe<Array<Scalars['String']>>;
+  metadataContract_lt?: InputMaybe<Scalars['String']>;
+  metadataContract_lte?: InputMaybe<Scalars['String']>;
+  metadataContract_not?: InputMaybe<Scalars['String']>;
+  metadataContract_not_contains?: InputMaybe<Scalars['String']>;
+  metadataContract_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  metadataContract_not_ends_with?: InputMaybe<Scalars['String']>;
+  metadataContract_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  metadataContract_not_in?: InputMaybe<Array<Scalars['String']>>;
+  metadataContract_not_starts_with?: InputMaybe<Scalars['String']>;
+  metadataContract_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  metadataContract_starts_with?: InputMaybe<Scalars['String']>;
+  metadataContract_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  name_contains?: InputMaybe<Scalars['String']>;
+  name_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  name_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_gt?: InputMaybe<Scalars['String']>;
+  name_gte?: InputMaybe<Scalars['String']>;
+  name_in?: InputMaybe<Array<Scalars['String']>>;
+  name_lt?: InputMaybe<Scalars['String']>;
+  name_lte?: InputMaybe<Scalars['String']>;
+  name_not?: InputMaybe<Scalars['String']>;
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  name_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  name_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  name_not_in?: InputMaybe<Array<Scalars['String']>>;
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  name_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  name_starts_with_nocase?: InputMaybe<Scalars['String']>;
+};
+
+export enum Property_OrderBy {
+  Id = 'id',
+  MetadataContract = 'metadataContract',
+  Name = 'name',
 }
 
 export type Proposal = {
@@ -925,15 +1030,14 @@ export type Proposal = {
   description: Scalars['String'];
   descriptionHash: Scalars['Bytes'];
   forVotes: Scalars['BigInt'];
+  governorContract: GovernorContract;
   id: Scalars['ID'];
   status: ProposalStatus;
   submitter: Account;
-  targets: Array<Scalars['Bytes']>;
-  transaction?: Maybe<TreasuryTransaction>;
+  targets: Array<Scalars['String']>;
   values: Array<Scalars['BigInt']>;
   votes: Array<Vote>;
 };
-
 
 export type ProposalVotesArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -949,7 +1053,7 @@ export enum ProposalStatus {
   Executed = 'EXECUTED',
   Pending = 'PENDING',
   Queued = 'QUEUED',
-  Vetoed = 'VETOED'
+  Vetoed = 'VETOED',
 }
 
 export type Proposal_Filter = {
@@ -1011,6 +1115,27 @@ export type Proposal_Filter = {
   forVotes_lte?: InputMaybe<Scalars['BigInt']>;
   forVotes_not?: InputMaybe<Scalars['BigInt']>;
   forVotes_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  governorContract?: InputMaybe<Scalars['String']>;
+  governorContract_?: InputMaybe<GovernorContract_Filter>;
+  governorContract_contains?: InputMaybe<Scalars['String']>;
+  governorContract_contains_nocase?: InputMaybe<Scalars['String']>;
+  governorContract_ends_with?: InputMaybe<Scalars['String']>;
+  governorContract_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  governorContract_gt?: InputMaybe<Scalars['String']>;
+  governorContract_gte?: InputMaybe<Scalars['String']>;
+  governorContract_in?: InputMaybe<Array<Scalars['String']>>;
+  governorContract_lt?: InputMaybe<Scalars['String']>;
+  governorContract_lte?: InputMaybe<Scalars['String']>;
+  governorContract_not?: InputMaybe<Scalars['String']>;
+  governorContract_not_contains?: InputMaybe<Scalars['String']>;
+  governorContract_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  governorContract_not_ends_with?: InputMaybe<Scalars['String']>;
+  governorContract_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  governorContract_not_in?: InputMaybe<Array<Scalars['String']>>;
+  governorContract_not_starts_with?: InputMaybe<Scalars['String']>;
+  governorContract_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  governorContract_starts_with?: InputMaybe<Scalars['String']>;
+  governorContract_starts_with_nocase?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   id_gt?: InputMaybe<Scalars['ID']>;
   id_gte?: InputMaybe<Scalars['ID']>;
@@ -1044,33 +1169,12 @@ export type Proposal_Filter = {
   submitter_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
   submitter_starts_with?: InputMaybe<Scalars['String']>;
   submitter_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  targets?: InputMaybe<Array<Scalars['Bytes']>>;
-  targets_contains?: InputMaybe<Array<Scalars['Bytes']>>;
-  targets_contains_nocase?: InputMaybe<Array<Scalars['Bytes']>>;
-  targets_not?: InputMaybe<Array<Scalars['Bytes']>>;
-  targets_not_contains?: InputMaybe<Array<Scalars['Bytes']>>;
-  targets_not_contains_nocase?: InputMaybe<Array<Scalars['Bytes']>>;
-  transaction?: InputMaybe<Scalars['String']>;
-  transaction_?: InputMaybe<TreasuryTransaction_Filter>;
-  transaction_contains?: InputMaybe<Scalars['String']>;
-  transaction_contains_nocase?: InputMaybe<Scalars['String']>;
-  transaction_ends_with?: InputMaybe<Scalars['String']>;
-  transaction_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  transaction_gt?: InputMaybe<Scalars['String']>;
-  transaction_gte?: InputMaybe<Scalars['String']>;
-  transaction_in?: InputMaybe<Array<Scalars['String']>>;
-  transaction_lt?: InputMaybe<Scalars['String']>;
-  transaction_lte?: InputMaybe<Scalars['String']>;
-  transaction_not?: InputMaybe<Scalars['String']>;
-  transaction_not_contains?: InputMaybe<Scalars['String']>;
-  transaction_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  transaction_not_ends_with?: InputMaybe<Scalars['String']>;
-  transaction_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  transaction_not_in?: InputMaybe<Array<Scalars['String']>>;
-  transaction_not_starts_with?: InputMaybe<Scalars['String']>;
-  transaction_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  transaction_starts_with?: InputMaybe<Scalars['String']>;
-  transaction_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  targets?: InputMaybe<Array<Scalars['String']>>;
+  targets_contains?: InputMaybe<Array<Scalars['String']>>;
+  targets_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
+  targets_not?: InputMaybe<Array<Scalars['String']>>;
+  targets_not_contains?: InputMaybe<Array<Scalars['String']>>;
+  targets_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   values?: InputMaybe<Array<Scalars['BigInt']>>;
   values_contains?: InputMaybe<Array<Scalars['BigInt']>>;
   values_contains_nocase?: InputMaybe<Array<Scalars['BigInt']>>;
@@ -1087,13 +1191,13 @@ export enum Proposal_OrderBy {
   Description = 'description',
   DescriptionHash = 'descriptionHash',
   ForVotes = 'forVotes',
+  GovernorContract = 'governorContract',
   Id = 'id',
   Status = 'status',
   Submitter = 'submitter',
   Targets = 'targets',
-  Transaction = 'transaction',
   Values = 'values',
-  Votes = 'votes'
+  Votes = 'votes',
 }
 
 export type Query = {
@@ -1118,6 +1222,8 @@ export type Query = {
   governorContracts: Array<GovernorContract>;
   metadataContract?: Maybe<MetadataContract>;
   metadataContracts: Array<MetadataContract>;
+  properties: Array<Property>;
+  property?: Maybe<Property>;
   proposal?: Maybe<Proposal>;
   proposals: Array<Proposal>;
   token?: Maybe<Token>;
@@ -1132,18 +1238,15 @@ export type Query = {
   votes: Array<Vote>;
 };
 
-
 export type Query_MetaArgs = {
   block?: InputMaybe<Block_Height>;
 };
-
 
 export type QueryAccountArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryAccountsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1155,20 +1258,17 @@ export type QueryAccountsArgs = {
   where?: InputMaybe<Account_Filter>;
 };
 
-
 export type QueryAuctionArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryAuctionBidArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryAuctionBidsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1180,13 +1280,11 @@ export type QueryAuctionBidsArgs = {
   where?: InputMaybe<AuctionBid_Filter>;
 };
 
-
 export type QueryAuctionContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryAuctionContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1198,7 +1296,6 @@ export type QueryAuctionContractsArgs = {
   where?: InputMaybe<AuctionContract_Filter>;
 };
 
-
 export type QueryAuctionsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1209,13 +1306,11 @@ export type QueryAuctionsArgs = {
   where?: InputMaybe<Auction_Filter>;
 };
 
-
 export type QueryDaoArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryDaosArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1227,13 +1322,11 @@ export type QueryDaosArgs = {
   where?: InputMaybe<Dao_Filter>;
 };
 
-
 export type QueryDelegationArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryDelegationsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1245,13 +1338,11 @@ export type QueryDelegationsArgs = {
   where?: InputMaybe<Delegation_Filter>;
 };
 
-
 export type QueryFounderInfoArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryFounderInfosArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1263,13 +1354,11 @@ export type QueryFounderInfosArgs = {
   where?: InputMaybe<FounderInfo_Filter>;
 };
 
-
 export type QueryGovernorContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryGovernorContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1281,13 +1370,11 @@ export type QueryGovernorContractsArgs = {
   where?: InputMaybe<GovernorContract_Filter>;
 };
 
-
 export type QueryMetadataContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryMetadataContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1299,13 +1386,27 @@ export type QueryMetadataContractsArgs = {
   where?: InputMaybe<MetadataContract_Filter>;
 };
 
+export type QueryPropertiesArgs = {
+  block?: InputMaybe<Block_Height>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Property_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<Property_Filter>;
+};
+
+export type QueryPropertyArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
 
 export type QueryProposalArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryProposalsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1317,20 +1418,17 @@ export type QueryProposalsArgs = {
   where?: InputMaybe<Proposal_Filter>;
 };
 
-
 export type QueryTokenArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type QueryTokenContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryTokenContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1342,7 +1440,6 @@ export type QueryTokenContractsArgs = {
   where?: InputMaybe<TokenContract_Filter>;
 };
 
-
 export type QueryTokensArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1353,13 +1450,11 @@ export type QueryTokensArgs = {
   where?: InputMaybe<Token_Filter>;
 };
 
-
 export type QueryTreasuryContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryTreasuryContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1371,13 +1466,11 @@ export type QueryTreasuryContractsArgs = {
   where?: InputMaybe<TreasuryContract_Filter>;
 };
 
-
 export type QueryTreasuryTransactionArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryTreasuryTransactionsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1389,13 +1482,11 @@ export type QueryTreasuryTransactionsArgs = {
   where?: InputMaybe<TreasuryTransaction_Filter>;
 };
 
-
 export type QueryVoteArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type QueryVotesArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1429,6 +1520,8 @@ export type Subscription = {
   governorContracts: Array<GovernorContract>;
   metadataContract?: Maybe<MetadataContract>;
   metadataContracts: Array<MetadataContract>;
+  properties: Array<Property>;
+  property?: Maybe<Property>;
   proposal?: Maybe<Proposal>;
   proposals: Array<Proposal>;
   token?: Maybe<Token>;
@@ -1443,18 +1536,15 @@ export type Subscription = {
   votes: Array<Vote>;
 };
 
-
 export type Subscription_MetaArgs = {
   block?: InputMaybe<Block_Height>;
 };
-
 
 export type SubscriptionAccountArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionAccountsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1466,20 +1556,17 @@ export type SubscriptionAccountsArgs = {
   where?: InputMaybe<Account_Filter>;
 };
 
-
 export type SubscriptionAuctionArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionAuctionBidArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionAuctionBidsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1491,13 +1578,11 @@ export type SubscriptionAuctionBidsArgs = {
   where?: InputMaybe<AuctionBid_Filter>;
 };
 
-
 export type SubscriptionAuctionContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionAuctionContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1509,7 +1594,6 @@ export type SubscriptionAuctionContractsArgs = {
   where?: InputMaybe<AuctionContract_Filter>;
 };
 
-
 export type SubscriptionAuctionsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1520,13 +1604,11 @@ export type SubscriptionAuctionsArgs = {
   where?: InputMaybe<Auction_Filter>;
 };
 
-
 export type SubscriptionDaoArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionDaosArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1538,13 +1620,11 @@ export type SubscriptionDaosArgs = {
   where?: InputMaybe<Dao_Filter>;
 };
 
-
 export type SubscriptionDelegationArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionDelegationsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1556,13 +1636,11 @@ export type SubscriptionDelegationsArgs = {
   where?: InputMaybe<Delegation_Filter>;
 };
 
-
 export type SubscriptionFounderInfoArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionFounderInfosArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1574,13 +1652,11 @@ export type SubscriptionFounderInfosArgs = {
   where?: InputMaybe<FounderInfo_Filter>;
 };
 
-
 export type SubscriptionGovernorContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionGovernorContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1592,13 +1668,11 @@ export type SubscriptionGovernorContractsArgs = {
   where?: InputMaybe<GovernorContract_Filter>;
 };
 
-
 export type SubscriptionMetadataContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionMetadataContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1610,13 +1684,27 @@ export type SubscriptionMetadataContractsArgs = {
   where?: InputMaybe<MetadataContract_Filter>;
 };
 
+export type SubscriptionPropertiesArgs = {
+  block?: InputMaybe<Block_Height>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Property_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<Property_Filter>;
+};
+
+export type SubscriptionPropertyArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
 
 export type SubscriptionProposalArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionProposalsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1628,20 +1716,17 @@ export type SubscriptionProposalsArgs = {
   where?: InputMaybe<Proposal_Filter>;
 };
 
-
 export type SubscriptionTokenArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
-
 export type SubscriptionTokenContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionTokenContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1653,7 +1738,6 @@ export type SubscriptionTokenContractsArgs = {
   where?: InputMaybe<TokenContract_Filter>;
 };
 
-
 export type SubscriptionTokensArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1664,13 +1748,11 @@ export type SubscriptionTokensArgs = {
   where?: InputMaybe<Token_Filter>;
 };
 
-
 export type SubscriptionTreasuryContractArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionTreasuryContractsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1682,13 +1764,11 @@ export type SubscriptionTreasuryContractsArgs = {
   where?: InputMaybe<TreasuryContract_Filter>;
 };
 
-
 export type SubscriptionTreasuryTransactionArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionTreasuryTransactionsArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1700,13 +1780,11 @@ export type SubscriptionTreasuryTransactionsArgs = {
   where?: InputMaybe<TreasuryTransaction_Filter>;
 };
 
-
 export type SubscriptionVoteArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
-
 
 export type SubscriptionVotesArgs = {
   block?: InputMaybe<Block_Height>;
@@ -1731,6 +1809,7 @@ export type Token = {
 export type TokenContract = {
   __typename?: 'TokenContract';
   DAO: Dao;
+  auctionContract: AuctionContract;
   contractURI: Scalars['String'];
   founders: Array<FounderInfo>;
   id: Scalars['ID'];
@@ -1740,7 +1819,6 @@ export type TokenContract = {
   totalSupply: Scalars['BigInt'];
 };
 
-
 export type TokenContractFoundersArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<FounderInfo_OrderBy>;
@@ -1748,7 +1826,6 @@ export type TokenContractFoundersArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<FounderInfo_Filter>;
 };
-
 
 export type TokenContractTokensArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -1782,6 +1859,27 @@ export type TokenContract_Filter = {
   DAO_starts_with_nocase?: InputMaybe<Scalars['String']>;
   /** Filter for the block changed event. */
   _change_block?: InputMaybe<BlockChangedFilter>;
+  auctionContract?: InputMaybe<Scalars['String']>;
+  auctionContract_?: InputMaybe<AuctionContract_Filter>;
+  auctionContract_contains?: InputMaybe<Scalars['String']>;
+  auctionContract_contains_nocase?: InputMaybe<Scalars['String']>;
+  auctionContract_ends_with?: InputMaybe<Scalars['String']>;
+  auctionContract_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  auctionContract_gt?: InputMaybe<Scalars['String']>;
+  auctionContract_gte?: InputMaybe<Scalars['String']>;
+  auctionContract_in?: InputMaybe<Array<Scalars['String']>>;
+  auctionContract_lt?: InputMaybe<Scalars['String']>;
+  auctionContract_lte?: InputMaybe<Scalars['String']>;
+  auctionContract_not?: InputMaybe<Scalars['String']>;
+  auctionContract_not_contains?: InputMaybe<Scalars['String']>;
+  auctionContract_not_contains_nocase?: InputMaybe<Scalars['String']>;
+  auctionContract_not_ends_with?: InputMaybe<Scalars['String']>;
+  auctionContract_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
+  auctionContract_not_in?: InputMaybe<Array<Scalars['String']>>;
+  auctionContract_not_starts_with?: InputMaybe<Scalars['String']>;
+  auctionContract_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  auctionContract_starts_with?: InputMaybe<Scalars['String']>;
+  auctionContract_starts_with_nocase?: InputMaybe<Scalars['String']>;
   contractURI?: InputMaybe<Scalars['String']>;
   contractURI_contains?: InputMaybe<Scalars['String']>;
   contractURI_contains_nocase?: InputMaybe<Scalars['String']>;
@@ -1864,13 +1962,14 @@ export type TokenContract_Filter = {
 
 export enum TokenContract_OrderBy {
   Dao = 'DAO',
+  AuctionContract = 'auctionContract',
   ContractUri = 'contractURI',
   Founders = 'founders',
   Id = 'id',
   Name = 'name',
   Symbol = 'symbol',
   Tokens = 'tokens',
-  TotalSupply = 'totalSupply'
+  TotalSupply = 'totalSupply',
 }
 
 export type Token_Filter = {
@@ -1983,7 +2082,7 @@ export enum Token_OrderBy {
   Owner = 'owner',
   TokenContract = 'tokenContract',
   TokenId = 'tokenId',
-  TokenUri = 'tokenURI'
+  TokenUri = 'tokenURI',
 }
 
 export type TreasuryContract = {
@@ -1994,7 +2093,6 @@ export type TreasuryContract = {
   id: Scalars['ID'];
   transactions: Array<TreasuryTransaction>;
 };
-
 
 export type TreasuryContractTransactionsArgs = {
   first?: InputMaybe<Scalars['Int']>;
@@ -2060,7 +2158,7 @@ export enum TreasuryContract_OrderBy {
   Delay = 'delay',
   GracePeriod = 'gracePeriod',
   Id = 'id',
-  Transactions = 'transactions'
+  Transactions = 'transactions',
 }
 
 export type TreasuryTransaction = {
@@ -2156,49 +2254,28 @@ export enum TreasuryTransaction_OrderBy {
   Id = 'id',
   Proposal = 'proposal',
   TransactionHash = 'transactionHash',
-  TreasuryContract = 'treasuryContract'
+  TreasuryContract = 'treasuryContract',
 }
 
 export type Vote = {
   __typename?: 'Vote';
-  delegate?: Maybe<Account>;
   id: Scalars['ID'];
   proposal: Proposal;
-  reason?: Maybe<Scalars['String']>;
+  reason: Scalars['String'];
   supported: VoteType;
   voter: Account;
+  weight: Scalars['BigInt'];
 };
 
 export enum VoteType {
   Abstain = 'ABSTAIN',
   Against = 'AGAINST',
-  For = 'FOR'
+  For = 'FOR',
 }
 
 export type Vote_Filter = {
   /** Filter for the block changed event. */
   _change_block?: InputMaybe<BlockChangedFilter>;
-  delegate?: InputMaybe<Scalars['String']>;
-  delegate_?: InputMaybe<Account_Filter>;
-  delegate_contains?: InputMaybe<Scalars['String']>;
-  delegate_contains_nocase?: InputMaybe<Scalars['String']>;
-  delegate_ends_with?: InputMaybe<Scalars['String']>;
-  delegate_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  delegate_gt?: InputMaybe<Scalars['String']>;
-  delegate_gte?: InputMaybe<Scalars['String']>;
-  delegate_in?: InputMaybe<Array<Scalars['String']>>;
-  delegate_lt?: InputMaybe<Scalars['String']>;
-  delegate_lte?: InputMaybe<Scalars['String']>;
-  delegate_not?: InputMaybe<Scalars['String']>;
-  delegate_not_contains?: InputMaybe<Scalars['String']>;
-  delegate_not_contains_nocase?: InputMaybe<Scalars['String']>;
-  delegate_not_ends_with?: InputMaybe<Scalars['String']>;
-  delegate_not_ends_with_nocase?: InputMaybe<Scalars['String']>;
-  delegate_not_in?: InputMaybe<Array<Scalars['String']>>;
-  delegate_not_starts_with?: InputMaybe<Scalars['String']>;
-  delegate_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
-  delegate_starts_with?: InputMaybe<Scalars['String']>;
-  delegate_starts_with_nocase?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   id_gt?: InputMaybe<Scalars['ID']>;
   id_gte?: InputMaybe<Scalars['ID']>;
@@ -2273,15 +2350,23 @@ export type Vote_Filter = {
   voter_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
   voter_starts_with?: InputMaybe<Scalars['String']>;
   voter_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  weight?: InputMaybe<Scalars['BigInt']>;
+  weight_gt?: InputMaybe<Scalars['BigInt']>;
+  weight_gte?: InputMaybe<Scalars['BigInt']>;
+  weight_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  weight_lt?: InputMaybe<Scalars['BigInt']>;
+  weight_lte?: InputMaybe<Scalars['BigInt']>;
+  weight_not?: InputMaybe<Scalars['BigInt']>;
+  weight_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
 };
 
 export enum Vote_OrderBy {
-  Delegate = 'delegate',
   Id = 'id',
   Proposal = 'proposal',
   Reason = 'reason',
   Supported = 'supported',
-  Voter = 'voter'
+  Voter = 'voter',
+  Weight = 'weight',
 }
 
 export type _Block_ = {
@@ -2314,5 +2399,5 @@ export enum _SubgraphErrorPolicy_ {
   /** Data will be returned even if the subgraph has indexing errors */
   Allow = 'allow',
   /** If the subgraph has indexing errors, data will be omitted. The default. */
-  Deny = 'deny'
+  Deny = 'deny',
 }
