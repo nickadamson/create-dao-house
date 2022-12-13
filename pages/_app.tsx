@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { AppProps } from 'next/app';
-
+import AppProps from 'next/app';
 import { WagmiConfig } from 'wagmi';
+
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, client } from '../providers/wagmi';
 
