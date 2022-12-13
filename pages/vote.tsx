@@ -1,4 +1,5 @@
 import { GetServerSidePropsResult } from 'next';
+
 import { getGovernanceDetails, GovernanceDetails } from '../data/subgraph';
 
 export default function Vote({ gov }: { gov: GovernanceDetails }) {
@@ -8,12 +9,15 @@ export default function Vote({ gov }: { gov: GovernanceDetails }) {
       <div className="text-xl">{gov.tokenContract.name} DAO</div>
       {/* proposals */}
       {gov.proposals.map((proposal) => {
+        const propArr = proposal.description.split('&&');
+        const title = propArr[0];
+        const content = propArr[1];
         return (
-          <div>
-            {proposal.id}
-            <br />
-            {proposal.description}
-          </div>
+          <>
+            <div key={title}>{title}</div>
+            {/* TODO: SANITIZE  */}
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          </>
         );
       })}
     </>
