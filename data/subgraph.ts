@@ -268,12 +268,25 @@ const GET_GOVERNOR_DETAILS = gql`
   ${GOVERNOR_DETAILS_FRAGMENT}
 `;
 
-// @ts-ignore
-export const getDaoInfo = async (): any => {
+export interface DAODetails {
+  id: string;
+  auctionContract: AuctionShort;
+  governorContract: GovShort;
+  metadataContract: MetaShort;
+  tokenContract: TokenShort;
+  treasuryContract: TreasuryShort;
+}
+
+export const getDAODetails = async (): Promise<DAODetails | undefined> => {
   try {
-    const { dao } = await request(SUBGRAPH_URL, GET_DAO_INFO, {
-      addr: `DAO-${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}`,
-    });
+    const { dao }: { dao?: DAODetails } = await request(
+      SUBGRAPH_URL,
+      GET_DAO_DETAILS,
+      {
+        addr: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}`,
+      }
+    );
+
     return dao;
   } catch (error) {
     console.log({ error });
