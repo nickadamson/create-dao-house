@@ -1,5 +1,6 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import Link from 'next/link';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Navigation = () => {
   return (
@@ -27,7 +28,7 @@ const Navigation = () => {
           </NavigationMenu.Sub>
           {/* wallet */}
           <NavigationMenu.Item className="w-1/4 border border-green-500 border-solid">
-            Wallet
+            <ConnectButton />
           </NavigationMenu.Item>
 
           {/* <NavigationMenu.Item className='border border-red-500 border-solid'> */}

@@ -1,7 +1,6 @@
 import { GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { Account } from '../components/Account';
 import { getDaoInfo } from '../data/subgraph';
@@ -31,7 +30,6 @@ export default function Home({ daoInfo }: { daoInfo: DaoInfo }) {
       </Head>
 
       <div className="font-bold underline">its-our-house-house-house</div>
-      <ConnectButton />
       {isConnected && <Account />}
       {JSON.stringify(daoInfo)}
     </>
