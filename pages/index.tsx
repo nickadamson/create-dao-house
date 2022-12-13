@@ -35,13 +35,14 @@ export default function Home({ daoInfo }: { daoInfo: DaoInfo }) {
       <Navigation />
       <ConnectButton />
       {isConnected && <Account />}
+      {JSON.stringify(daoInfo)}
     </>
   );
 }
 
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
-    daoInfo: any;
+    daoInfo: DaoInfo;
   }>
 > => {
   const daoInfo = await getDaoInfo();
