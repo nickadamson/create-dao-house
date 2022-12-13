@@ -8,16 +8,22 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { Account } from '../components/Account';
 import Placeholder from '../components/Placeholder';
+import { getDaoInfo } from '../data/subgraph';
 
-export interface AuctionData {
-  tokenId: string;
-  highestBid: string;
-  highestBidder: Address;
-  endTime: number;
-  startTime: number;
+export interface DaoInfo {
+  id: string;
+  tokenContract: {
+    name: string;
+    symbol: string;
+    totalSupply: number;
+  };
+
+  metadataContract: {
+    websiteURL: string;
+  };
 }
 
-export default function Home({ auctionData }: { auctionData: AuctionData }) {
+export default function Home({ daoInfo }: { daoInfo: DaoInfo }) {
   const { isConnected } = useAccount();
 
   return (
@@ -30,40 +36,21 @@ export default function Home({ auctionData }: { auctionData: AuctionData }) {
       <div>its-our-house-house-house</div>
       <ConnectButton />
       {isConnected && <Account />}
-      <Placeholder auctionData={auctionData} />
+      <Placeholder daoInfo={daoInfo} />
     </>
   );
 }
 
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
-    auctionData: any;
+    daoInfo: any;
   }>
 > => {
-  const provider = getDefaultProvider(
-    process.env.NODE_ENV === 'development' ? 'goerli' : 'mainnet'
-  );
-  const {
-    auction,
-    // governor, manager, token
-  } = BuilderSDK.connect({
-    signerOrProvider: provider,
-  });
-
-  const { tokenId, highestBid, highestBidder, endTime, startTime } =
-    await auction({
-      address: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS!,
-    }).auction();
+  const daoInfo = await getDaoInfo();
 
   return {
     props: {
-      auctionData: {
-        tokenId: tokenId.toHexString(),
-        highestBid: highestBid.toHexString(),
-        highestBidder,
-        endTime,
-        startTime,
-      },
+      daoInfo,
     },
   };
 };
