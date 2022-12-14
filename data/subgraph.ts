@@ -283,7 +283,7 @@ export const getDAODetails = async (): Promise<DAODetails | undefined> => {
       SUBGRAPH_URL,
       GET_DAO_DETAILS,
       {
-        addr: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}`,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
       }
     );
 
@@ -308,14 +308,14 @@ export const getGovernanceDetails = async (): Promise<
       SUBGRAPH_URL,
       GET_DAO_ADDRESSES,
       {
-        addr: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}`,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
       }
     );
 
     try {
       const { governorContract }: { governorContract: GovernorContract } =
         await request(SUBGRAPH_URL, GET_GOVERNOR_DETAILS, {
-          addr: `${dao.governorContract.id}`,
+          addr: dao.governorContract.id,
         });
 
       const governanceDetails = {
