@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode, useReducer } from 'react';
 
-export const AppStateContext = createContext<{} | null>(null);
+export const AppStateContext = createContext<object | null>(null);
 
 const initialState = {};
 
