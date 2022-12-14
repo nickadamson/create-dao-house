@@ -9,9 +9,7 @@ export default function Vote({ gov }: { gov: GovernanceDetails }) {
       <div className="text-xl">{gov.tokenContract.name} DAO</div>
       {/* proposals */}
       {gov.proposals.map((proposal) => {
-        const propArr = proposal.description.split('&&');
-        const title = propArr[0];
-        const content = propArr[1];
+        const [title, content] = proposal.description.split('&&');
         return (
           <>
             <div key={title}>{title}</div>
