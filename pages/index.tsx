@@ -1,45 +1,37 @@
 import { GetServerSidePropsResult } from 'next';
-import Head from 'next/head';
 import { useAccount } from 'wagmi';
 
 import { Account } from '../components/Account';
-import { getDaoInfo } from '../data/subgraph';
+import { DAODetails, getDAODetails } from '../data/subgraph';
 
-export interface DaoInfo {
-  id: string;
-  tokenContract: {
-    name: string;
-    symbol: string;
-    totalSupply: number;
-  };
-
-  metadataContract: {
-    websiteURL: string;
-  };
-}
-
-export default function Home({ daoInfo }: { daoInfo: DaoInfo }) {
+export default function Home({ daoDetails }: { daoDetails: DAODetails }) {
   const { isConnected } = useAccount();
 
   return (
     <>
       <div className="font-bold underline">its-our-house-house-house</div>
       {isConnected && <Account />}
-      {JSON.stringify(daoInfo)}
+      {JSON.stringify(daoDetails)}
     </>
   );
 }
 
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
-    daoInfo: DaoInfo;
+    daoDetails: DAODetails;
   }>
 > => {
-  const daoInfo = await getDaoInfo();
+  const daoDetails = await getDAODetails();
+
+  if (!daoDetails) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      daoInfo,
+      daoDetails,
     },
   };
 };

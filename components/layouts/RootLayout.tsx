@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import NextHead from 'next/head';
+
 import Navigation from '../Navigation';
 import Footer from '../Footer';
 
