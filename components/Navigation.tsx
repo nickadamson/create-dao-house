@@ -4,30 +4,30 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Navigation = () => {
   return (
-    <NavigationMenu.Root className="flex justify-center w-full z-[1] text-center h-full max-h-16 border-b">
-      <NavigationMenu.List className="flex justify-center w-screen p-1 m-0 text-black list-none bg-white border-b border-orange-400 dark:bg-black dark:text-white">
-        <div className="flex justify-center w-full max-w-[1536px]">
+    <NavigationMenu.Root className="flex justify-center w-full z-[1] text-center h-full max-h-16 bg-slate-400">
+      <NavigationMenu.List className="flex justify-center w-screen p-1 m-0 text-black list-none max-w-7xl">
+        <div className="flex items-center justify-center w-full">
           {/* logo */}
-          <NavigationMenu.Item className="w-1/4 border border-orange-500 border-solid">
-            <Link className="" href="/">
+          <NavigationMenu.Item className="flex w-1/4 ">
+            <Link className="w-full text-lg" href="/">
               Home
             </Link>
           </NavigationMenu.Item>
           {/* center nav */}
-          <NavigationMenu.Sub className="flex w-1/2 border border-red-500 border-solid">
-            <NavigationMenu.Item className="w-1/3">
+          <NavigationMenu.Sub className="flex justify-end w-1/2 ml-auto mr-0">
+            <NavigationMenu.Item className="w-48">
               <Link className="" href="/vote">
                 Vote
               </Link>
             </NavigationMenu.Item>
-            <NavigationMenu.Item className="w-1/3">
+            <NavigationMenu.Item className="w-48">
               <Link className="" href="/tokens">
                 Tokens
               </Link>
             </NavigationMenu.Item>
           </NavigationMenu.Sub>
           {/* wallet */}
-          <NavigationMenu.Item className="w-1/4 border border-green-500 border-solid">
+          <NavigationMenu.Item className="w-48">
             <ConnectButton />
           </NavigationMenu.Item>
 
@@ -40,10 +40,10 @@ const Navigation = () => {
           {/* </NavigationMenu.Sub> */}
           {/* </NavigationMenu.Content> */}
           {/* </NavigationMenu.Item> */}
-          <NavigationMenu.Indicator className="border border-red-500 border-solid" />
+          <NavigationMenu.Indicator className="" />
         </div>
       </NavigationMenu.List>
-      <NavigationMenu.Viewport className="border border-red-500 border-solid" />
+      <NavigationMenu.Viewport className="" />
     </NavigationMenu.Root>
   );
 };

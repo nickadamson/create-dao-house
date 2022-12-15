@@ -9,9 +9,10 @@ export default function Home({ daoDetails }: { daoDetails: DAODetails }) {
 
   return (
     <>
-      <div className="font-bold underline">its-our-house-house-house</div>
+      <div className="w-full">its-our-house-house-house</div>
       {isConnected && <Account />}
-      {JSON.stringify(daoDetails)}
+      <h1 className="">{daoDetails.tokenContract.name}</h1>
+      {/* {JSON.stringify(daoDetails)} */}
     </>
   );
 }
