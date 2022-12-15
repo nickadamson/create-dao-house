@@ -13,11 +13,20 @@ import { DAODetails, GovernanceDetails } from '../data/subgraph';
 export type Action = { type: ''; value: '' } | { type: ''; value: '' };
 
 export interface InitialState {
-  daoDetails?: DAODetails;
-  gov?: GovernanceDetails;
+  home: {
+    daoDetails?: DAODetails;
+  };
+  vote: {
+    gov?: GovernanceDetails;
+  };
+  tokens: Record<string, never>;
 }
 
-const initialState: InitialState = {};
+const initialState: InitialState = {
+  home: {},
+  vote: {},
+  tokens: {},
+};
 
 const reducer = (state: InitialState, action: Action) => {
   switch (action.type) {
