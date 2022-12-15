@@ -294,13 +294,6 @@ export const getDAODetails = async (): Promise<DAODetails | undefined> => {
   }
 };
 
-// export interface GovernanceDetails extends GovernorContract {
-//   tokenContract: {
-//     id: string;
-//     name: string;
-//   };
-// }
-
 export const getGovernanceDetails = async (): Promise<
   GovernorContract | undefined
 > => {
@@ -318,11 +311,6 @@ export const getGovernanceDetails = async (): Promise<
         await request(SUBGRAPH_URL, GET_GOVERNOR_DETAILS, {
           addr: dao.governorContract.id,
         });
-
-      // const governanceDetails = {
-      //   ...governorContract,
-      //   tokenContract: { ...dao.tokenContract },
-      // };
 
       return governorContract;
     } catch (error) {
