@@ -1,4 +1,5 @@
 import request, { gql } from 'graphql-request';
+
 import {
   AuctionContract,
   GovernorContract,
@@ -46,14 +47,14 @@ export type TreasuryShort = Pick<
   'id' | 'delay' | 'gracePeriod'
 >;
 
-export type DAOShort = {
+export interface DAOShort {
   id: string;
   auctionContract: { id: string };
   governorContract: { id: string };
   metadataContract: { id: string };
   tokenContract: { id: string; name: string };
   treasuryContract: { id: string };
-};
+}
 
 const DAO_SHORT_FRAGMENT = gql`
   fragment DAOShort on DAO {
