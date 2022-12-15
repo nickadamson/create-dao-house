@@ -13,9 +13,8 @@ import { DAODetails, GovernanceDetails } from '../data/subgraph';
 export type Action = { type: ''; value: '' } | { type: ''; value: '' };
 
 export interface InitialState {
-  home: {
-    daoDetails?: DAODetails;
-  };
+  daoDetails?: DAODetails;
+  home: Record<string, never>;
   vote: {
     gov?: GovernanceDetails;
   };
