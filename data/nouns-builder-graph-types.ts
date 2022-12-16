@@ -720,6 +720,7 @@ export type GovernorContract = {
   __typename?: 'GovernorContract';
   DAO: Dao;
   id: Scalars['ID'];
+  nextProposalNumber: Scalars['BigInt'];
   owner: Scalars['String'];
   proposalThreshold: Scalars['BigInt'];
   proposals: Array<Proposal>;
@@ -771,6 +772,14 @@ export type GovernorContract_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  nextProposalNumber?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_gt?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_gte?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  nextProposalNumber_lt?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_lte?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_not?: InputMaybe<Scalars['BigInt']>;
+  nextProposalNumber_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
   owner?: InputMaybe<Scalars['String']>;
   owner_contains?: InputMaybe<Scalars['String']>;
   owner_contains_nocase?: InputMaybe<Scalars['String']>;
@@ -860,6 +869,7 @@ export type GovernorContract_Filter = {
 export enum GovernorContract_OrderBy {
   Dao = 'DAO',
   Id = 'id',
+  NextProposalNumber = 'nextProposalNumber',
   Owner = 'owner',
   ProposalThreshold = 'proposalThreshold',
   Proposals = 'proposals',
@@ -1128,10 +1138,11 @@ export type Proposal = {
   forVotes: Scalars['BigInt'];
   governorContract: GovernorContract;
   id: Scalars['ID'];
+  number: Scalars['BigInt'];
   status: ProposalStatus;
   submitter: Account;
   targets: Array<Scalars['String']>;
-  title: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
   values: Array<Scalars['BigInt']>;
   votes: Array<Vote>;
 };
@@ -1255,6 +1266,14 @@ export type Proposal_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  number?: InputMaybe<Scalars['BigInt']>;
+  number_gt?: InputMaybe<Scalars['BigInt']>;
+  number_gte?: InputMaybe<Scalars['BigInt']>;
+  number_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  number_lt?: InputMaybe<Scalars['BigInt']>;
+  number_lte?: InputMaybe<Scalars['BigInt']>;
+  number_not?: InputMaybe<Scalars['BigInt']>;
+  number_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
   status?: InputMaybe<ProposalStatus>;
   status_in?: InputMaybe<Array<ProposalStatus>>;
   status_not?: InputMaybe<ProposalStatus>;
@@ -1326,6 +1345,7 @@ export enum Proposal_OrderBy {
   ForVotes = 'forVotes',
   GovernorContract = 'governorContract',
   Id = 'id',
+  Number = 'number',
   Status = 'status',
   Submitter = 'submitter',
   Targets = 'targets',

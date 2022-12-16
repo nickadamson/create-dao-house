@@ -4,6 +4,7 @@ import {
   AuctionContract,
   GovernorContract,
   MetadataContract,
+  Proposal,
   TokenContract,
   TreasuryContract,
 } from './nouns-builder-graph-types';
@@ -189,15 +190,15 @@ const AUCTION_DETAILS_FRAGMENT = gql`
 const VOTE_DETAILS_FRAGMENT = gql`
   fragment VoteDetails on Vote {
     id
-    reason
     supported
-    voter {
-      id
-    }
-    # delegate {
-    #   id
-    # }
+    reason
+    weight
+    blockTimestamp
     proposal {
+      id
+      number
+    }
+    voter {
       id
     }
   }
@@ -206,11 +207,18 @@ const VOTE_DETAILS_FRAGMENT = gql`
 const PROPOSAL_DETAILS_FRAGMENT = gql`
   fragment ProposalDetails on Proposal {
     id
+    number
+    title
+    description
+    creationTxHash
+    blockTimestamp
+    status
     forVotes
     againstVotes
     abstainVotes
-    description
-    status
+    targets
+    values
+    calldatas
     submitter {
       id
     }
@@ -227,12 +235,16 @@ const GOVERNOR_DETAILS_FRAGMENT = gql`
     id
     vetoEnabled
     vetoerAddress
-    proposalThreshold
-    quoromThreshold
     votingDelay
     votingPeriod
+    proposalThreshold
+    quoromThreshold
     proposals {
       ...ProposalDetails
+    }
+    tokenContract {
+      id
+      name
     }
   }
 
@@ -269,6 +281,16 @@ const GET_GOVERNOR_DETAILS = gql`
   ${GOVERNOR_DETAILS_FRAGMENT}
 `;
 
+const GET_PROPOSAL_DETAILS = gql`
+  query getProposalDetails($proposalId: String!) {
+    proposal(id: $proposalId) {
+      ...ProposalDetails
+    }
+  }
+
+  ${PROPOSAL_DETAILS_FRAGMENT}
+`;
+
 export interface DAODetails {
   id: string;
   auctionContract: AuctionShort;
@@ -277,6 +299,22 @@ export interface DAODetails {
   tokenContract: TokenShort;
   treasuryContract: TreasuryShort;
 }
+
+export const getDAOShort = async (): Promise<DAOShort | undefined> => {
+  try {
+    const { dao }: { dao?: DAODetails } = await request(
+      SUBGRAPH_URL,
+      GET_DAO_ADDRESSES,
+      {
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+      }
+    );
+
+    return dao;
+  } catch (error) {
+    console.log({ error });
+  }
+};
 
 export const getDAODetails = async (): Promise<DAODetails | undefined> => {
   try {
@@ -316,6 +354,24 @@ export const getGovernanceDetails = async (): Promise<
     } catch (error) {
       console.log({ error });
     }
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const getProposalDetails = async (
+  proposalId: string
+): Promise<Proposal | undefined> => {
+  try {
+    const { proposal }: { proposal: Proposal } = await request(
+      SUBGRAPH_URL,
+      GET_PROPOSAL_DETAILS,
+      {
+        proposalId: proposalId.toLowerCase(),
+      }
+    );
+
+    return proposal;
   } catch (error) {
     console.log({ error });
   }
