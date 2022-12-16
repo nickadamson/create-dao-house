@@ -7,7 +7,8 @@ import {
   PropsWithChildren,
 } from 'react';
 
-import { DAODetails, GovernanceDetails } from '../data/subgraph';
+import { GovernorContract } from '../data/nouns-builder-graph-types';
+import { DAODetails } from '../data/subgraph';
 
 // TODO: replace placeholder actions with new actions
 export type Action = { type: ''; value: '' } | { type: ''; value: '' };
@@ -16,7 +17,7 @@ export interface InitialState {
   daoDetails?: DAODetails;
   home: Record<string, never>;
   vote: {
-    gov?: GovernanceDetails;
+    gov?: GovernorContract;
   };
   tokens: Record<string, never>;
 }
