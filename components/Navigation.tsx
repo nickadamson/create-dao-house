@@ -1,6 +1,8 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import Link from 'next/link';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+
+import NavigationLink from './NavigationLink';
+import Logo from './Logo';
 
 const Navigation = () => {
   return (
@@ -9,21 +11,17 @@ const Navigation = () => {
         <div className="flex items-center justify-center w-full">
           {/* logo */}
           <NavigationMenu.Item className="flex w-1/4 ">
-            <Link className="w-full text-lg" href="/">
-              Home
-            </Link>
+            <NavigationLink className="w-full text-lg" href="/">
+              <Logo />
+            </NavigationLink>
           </NavigationMenu.Item>
           {/* center nav */}
           <NavigationMenu.Sub className="flex justify-end w-1/2 ml-auto mr-0">
             <NavigationMenu.Item className="w-48">
-              <Link className="" href="/vote">
-                Vote
-              </Link>
+              <NavigationLink href="/vote">Vote</NavigationLink>
             </NavigationMenu.Item>
             <NavigationMenu.Item className="w-48">
-              <Link className="" href="/tokens">
-                Tokens
-              </Link>
+              <NavigationLink href="/tokens">Tokens</NavigationLink>
             </NavigationMenu.Item>
           </NavigationMenu.Sub>
           {/* wallet */}
