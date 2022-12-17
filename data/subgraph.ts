@@ -2,9 +2,11 @@ import request, { gql } from 'graphql-request';
 
 import {
   AuctionContract,
+  Dao,
   GovernorContract,
   MetadataContract,
   Proposal,
+  Token,
   TokenContract,
   TreasuryContract,
 } from './nouns-builder-graph-types';
@@ -291,6 +293,29 @@ const GET_PROPOSAL_DETAILS = gql`
   ${PROPOSAL_DETAILS_FRAGMENT}
 `;
 
+const GET_DAO_TOKENS = gql`
+  query getDAOTokens($addr: String!) {
+    dao(id: $addr) {
+      tokenContract {
+        tokens {
+          ...TokenDetails
+        }
+      }
+    }
+  }
+
+  ${TOKEN_DETAILS_FRAGMENT}
+`;
+const GET_TOKEN = gql`
+  query getToken($tokenId: String!) {
+    token(id: $tokenId) {
+      ...TokenDetails
+    }
+  }
+
+  ${TOKEN_DETAILS_FRAGMENT}
+`;
+
 export interface DAODetails {
   id: string;
   auctionContract: AuctionShort;
@@ -372,6 +397,31 @@ export const getProposalDetails = async (
     );
 
     return proposal;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const getDAOTokens = async (): Promise<Token[] | undefined> => {
+  try {
+    const { dao }: { dao: Dao } = await request(SUBGRAPH_URL, GET_DAO_TOKENS, {
+      addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+    });
+
+    const { tokens } = dao.tokenContract;
+
+    return tokens;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+export const getToken = async (tokenId: string): Promise<Token | undefined> => {
+  try {
+    const { token }: { token: Token } = await request(SUBGRAPH_URL, GET_TOKEN, {
+      tokenId: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}-${tokenId}`,
+    });
+
+    return token;
   } catch (error) {
     console.log({ error });
   }
