@@ -12,6 +12,7 @@ export default function Home({ daoDetails }: { daoDetails: DAODetails }) {
       <div className="w-full">its-our-house-house-house</div>
       {isConnected && <Account />}
       <h1 className="">{daoDetails.tokenContract.name}</h1>
+      {/* <TokenAuction auction={auction} /> */}
       {/* {JSON.stringify(daoDetails)} */}
     </>
   );
