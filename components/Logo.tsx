@@ -11,7 +11,7 @@ const Logo = () => {
   return (
     <div className="flex items-center">
       <Image
-        className={`${hidden ? 'hidden' : ''pr-2 }`}
+        className={`pr-2 ${hidden ? 'hidden' : ''}`}
         src={contractURI.image}
         alt="logo"
         height={32}

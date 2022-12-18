@@ -37,5 +37,11 @@ export function parseContractURI(contractURI: string) {
     return { name, description, external_url, image: ipfsImage(image) };
   } catch (error) {
     console.log(error);
+    return {
+      name: '',
+      description: '',
+      external_url: '',
+      image: '',
+    };
   }
 }

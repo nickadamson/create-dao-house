@@ -337,7 +337,7 @@ export const getDAOShort = async (): Promise<DAOShort | undefined> => {
       SUBGRAPH_URL,
       GET_DAO_ADDRESSES,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
 
@@ -368,7 +368,7 @@ export const getDAODetails = async (): Promise<
       SUBGRAPH_URL,
       GET_DAO_DETAILS,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
     const contractURI = getParsedContractURI(dao)!;
@@ -388,7 +388,7 @@ export const getGovernanceDetails = async (): Promise<
       SUBGRAPH_URL,
       GET_DAO_ADDRESSES,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
     const contractURI = getParsedContractURI(dao)!;
@@ -435,7 +435,7 @@ export const getDAOTokens = async (): Promise<
 > => {
   try {
     const { dao }: { dao: Dao } = await request(SUBGRAPH_URL, GET_DAO_TOKENS, {
-      addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+      addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
     });
     const contractURI = getParsedContractURI(dao)!;
 
@@ -452,9 +452,9 @@ export const getToken = async (
 ): Promise<{ token: Token; contractURI: ParsedContractURI } | undefined> => {
   try {
     const { token }: { token: Token } = await request(SUBGRAPH_URL, GET_TOKEN, {
-      tokenId: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}-${tokenId}`,
+      tokenId: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase()}-${tokenId}`,
     });
-    const dao = await getDAOShort()!;
+    const dao = await getDAOShort();
     const contractURI = getParsedContractURI(dao!)!;
 
     return { token, contractURI };
