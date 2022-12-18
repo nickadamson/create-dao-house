@@ -20,7 +20,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <DataStoreProvider defaults={pageProps}>
       <WagmiConfig client={client}>
         <RainbowKitProvider chains={chains}>
-          <RootLayout>{mounted && <Component {...pageProps} />}</RootLayout>
+          {mounted && (
+            <RootLayout>
+              <Component {...pageProps} />
+            </RootLayout>
+          )}
         </RainbowKitProvider>
       </WagmiConfig>
     </DataStoreProvider>
