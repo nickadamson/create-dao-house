@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 
 import { Token } from '../../data/nouns-builder-graph-types';
+import { getTokenImageURL } from '../../utils/decoding';
 
 interface Props extends PropsWithChildren {
   token: Token;
@@ -15,8 +16,7 @@ const TokenFull = ({ token, children }: Props) => {
     <div className="flex flex-col w-full h-full">
       <div className="relative p-12 m-8 w-full">
         <Image
-          // need to  decode64 sigh
-          src={token.tokenURI ?? ''}
+          src={getTokenImageURL(token)}
           alt={'Token #' + token.tokenId}
           fill
         />
