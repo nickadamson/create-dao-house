@@ -9,6 +9,7 @@ import { ReactNode } from 'react';
 // });
 const font = Londrina_Solid({
   weight: ['100', '300', '400', '900'],
+  subsets: ['latin'],
   variable: '--font-nouns',
   display: 'swap',
 });
