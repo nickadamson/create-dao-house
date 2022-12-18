@@ -5,17 +5,12 @@ const selectedTheme =
     | 'nouns'
     | 'modern'
     | 'sleek'
-    | 'tech'
+    // | 'tech'
     | undefined) ?? 'nouns';
 
-const themes = {
-  //example
-  button: {
-    sleek: 'border border-black',
-    modern: 'border border-gray-500 rounded-lg',
-    nouns: 'bg-red-500',
-  },
-};
+export function getTheme() {
+  return selectedTheme;
+}
 
 const DynamicModernFont = dynamic(
   () => import('../components/layouts/Fonts/ModernFont'),
