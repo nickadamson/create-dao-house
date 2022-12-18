@@ -12,18 +12,16 @@ interface Props extends PropsWithChildren {
 
 const TokenCard = ({ token, onClick, children }: Props) => {
   return (
-    <Card className="hover:cursor w-80 h-80" onClick={() => onClick?.()}>
-      <div className="flex flex-col w-full h-full">
-        <Image
-          // need to  decode64 sigh
-          src={getTokenImageURL(token)}
-          alt={'Token #' + token.tokenId}
-          width={320}
-          height={320}
-        />
-        <h4 className="">#{token.tokenId}</h4>
-        <span className="">Owner: {token.owner?.id}</span>
-      </div>
+    <Card className="token-card" onClick={() => onClick?.()}>
+      <Image
+        // need to  decode64 sigh
+        src={getTokenImageURL(token)}
+        alt={'Token #' + token.tokenId}
+        width={320}
+        height={320}
+      />
+      <h4 className="">#{token.tokenId}</h4>
+      <span className="">Owner: {token.owner?.id}</span>
     </Card>
   );
 };

@@ -9,4 +9,14 @@
   h1 {
     @apply text-2xl;
   }
+
+  button {
+  }
+}
+
+@layer component {
+  .token-card {
+    @apply flex flex-col w-80 h-80 hover:cursor;
+  }
+}
 }
