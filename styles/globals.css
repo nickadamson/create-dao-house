@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind variants;
 @tailwind utilities;
 
 @layer base {
@@ -7,32 +8,83 @@
     @apply text-2xl;
   }
 
-  button {
+  .sleek {
+    @apply text-white bg-black;
+  }
+
+  .modern {
+    @apply bg-gradient-to-bl from-gray-50 via-gray-100 to-gray-200;
+  }
+
+  .nouns {
+    @apply text-black bg-stone-100;
+  }
+
+  .nav-root {
+    @apply flex justify-center w-full z-[1] text-center h-full max-h-16;
+  }
+
+  .token-card {
+    @apply flex flex-col justify-between w-80 border border-gray-400;
+
+    .details {
+      @apply flex flex-col justify-between px-3 py-2 h-full;
+    }
+  }
+
+  .votes-wrapper {
+    @apply w-36 h-36 bg-gray-500;
+  }
+
+  .proposal-card {
+    @apply justify-between p-4 m-4 w-full;
+  }
+
+  .proposal-status {
+    @apply p-2 h-min;
   }
 }
 
 @layer components {
-  .token-card {
-    @apply flex flex-col w-80 h-80;
-  }
-}
-
-@layer utility {
   .sleek {
-    button {
-      @apply text-white bg-orange-500 border-4 border-green-500;
+    .token-card {
+      @apply text-white bg-black;
+    }
+
+    .proposal-card {
+      @apply rounded-sm border-2 border-black;
+    }
+
+    .proposal-status {
+      /* @apply ; */
     }
   }
 
   .modern {
-    button {
-      @apply text-black bg-yellow-500 border-2 border-purple-500;
+    .token-card {
+      @apply text-white bg-black rounded-b shadow;
+    }
+
+    .proposal-card {
+      @apply rounded-lg border border-black shadow-xl;
+    }
+
+    .proposal-status {
+      @apply rounded-md;
     }
   }
 
   .nouns {
-    button {
-      @apply text-gray-500 bg-red-500 border-8 border-blue-500;
+    .token-card {
+      @apply text-black bg-white rounded shadow-xl;
+    }
+
+    .proposal-card {
+      @apply rounded-lg border border-black shadow-xl;
+    }
+
+    .proposal-status {
+      @apply rounded-lg;
     }
   }
 }

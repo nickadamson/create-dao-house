@@ -1,4 +1,4 @@
-import { Theme } from '../utils/styling';
+import { Theme } from '../types';
 
 import { useDataStore } from './useDataStore';
 

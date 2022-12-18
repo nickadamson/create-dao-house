@@ -33,11 +33,11 @@ const Navigation = () => {
   }, [theme, dispatch]);
 
   return (
-    <NavigationMenu.Root className="flex justify-center w-full z-[1] text-center h-full max-h-16 bg-slate-400">
-      <NavigationMenu.List className="flex justify-center w-screen p-1 m-0 text-black list-none max-w-7xl">
-        <div className="flex items-center justify-center w-full">
+    <NavigationMenu.Root className="nav-root">
+      <NavigationMenu.List className="flex justify-center p-1 m-0 w-screen max-w-7xl list-none">
+        <div className="flex justify-center items-center w-full">
           {/* logo */}
-          <NavigationMenu.Item className="flex w-1/4 ">
+          <NavigationMenu.Item className="flex w-1/4">
             <NavigationLink className="w-full text-lg" href="/">
               <Logo />
             </NavigationLink>
@@ -48,7 +48,7 @@ const Navigation = () => {
             </NavigationMenu.Item>
           )}
           {/* center nav */}
-          <NavigationMenu.Sub className="flex justify-end w-1/2 ml-auto mr-0">
+          <NavigationMenu.Sub className="flex justify-end mr-0 ml-auto w-1/2">
             <NavigationMenu.Item className="w-48">
               <NavigationLink href="/vote">Vote</NavigationLink>
             </NavigationMenu.Item>

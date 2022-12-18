@@ -14,7 +14,7 @@ const font = Londrina_Solid({
 });
 
 const NounsFont = ({ children }: { children: ReactNode }) => {
-  return <main className={`${font.variable} font-local`}>{children}</main>;
+  return <main className={`${font.variable} font-nouns`}>{children}</main>;
 };
 
 export default NounsFont;

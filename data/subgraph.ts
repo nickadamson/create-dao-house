@@ -55,7 +55,7 @@ export interface DAOShort {
   auctionContract: { id: string };
   governorContract: { id: string };
   metadataContract: { id: string };
-  tokenContract: { id: string; name: string };
+  tokenContract: { id: string; name: string; description: string };
   treasuryContract: { id: string };
 }
 
@@ -74,6 +74,7 @@ const DAO_SHORT_FRAGMENT = gql`
     tokenContract {
       id
       name
+      description
     }
     treasuryContract {
       id
@@ -164,6 +165,10 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     }
     owner {
       id
+    }
+    tokenContract {
+      name
+      description
     }
   }
 `;
