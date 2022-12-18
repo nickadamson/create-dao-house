@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-interface ButtonProps {
-  buttonText: string;
+interface ButtonProps extends PropsWithChildren {
+  buttonText?: string;
   className?: string;
   onClick?: () => void;
   buttonType?: 'button' | 'submit';
@@ -12,10 +12,11 @@ const Button: FC<ButtonProps> = ({
   className,
   onClick,
   buttonType = 'button',
+  children,
 }) => {
   return (
     <button type={buttonType} className={className} onClick={() => onClick?.()}>
-      {buttonText}
+      {children ? children : buttonText}
     </button>
   );
 };
