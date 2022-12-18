@@ -168,7 +168,6 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     }
     tokenContract {
       name
-      description
     }
   }
 `;

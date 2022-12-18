@@ -3,15 +3,18 @@ import { useAccount } from 'wagmi';
 
 import { Account } from '../components/Account';
 import { DAODetails, getDAODetails } from '../data/subgraph';
+import { parseContractURI } from '../utils/decoding';
 
 export default function Home({ daoDetails }: { daoDetails: DAODetails }) {
   const { isConnected } = useAccount();
 
+  const { contractURI } = daoDetails.tokenContract;
+  const { name, description } = parseContractURI(contractURI)!;
   return (
     <>
-      <div className="w-full">its-our-house-house-house</div>
       {isConnected && <Account />}
-      <h1 className="">{daoDetails.tokenContract.name}</h1>
+      <h1 className="landing-title">{name}</h1>
+      <h2 className="landing-desc">{description}</h2>
       {/* <TokenAuction auction={auction} /> */}
       {/* {JSON.stringify(daoDetails)} */}
     </>
