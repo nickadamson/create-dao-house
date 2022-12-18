@@ -4,11 +4,17 @@ interface ButtonProps {
   buttonText: string;
   className?: string;
   onClick?: () => void;
+  buttonType?: 'button' | 'submit';
 }
 
-const Button: FC<ButtonProps> = ({ buttonText, className, onClick }) => {
+const Button: FC<ButtonProps> = ({
+  buttonText,
+  className,
+  onClick,
+  buttonType = 'button',
+}) => {
   return (
-    <button type="button" className={className} onClick={() => onClick?.()}>
+    <button type={buttonType} className={className} onClick={() => onClick?.()}>
       {buttonText}
     </button>
   );
