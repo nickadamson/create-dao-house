@@ -9,7 +9,7 @@ import {
 
 import { GovernorContract } from '../data/nouns-builder-graph-types';
 import { DAODetails } from '../data/subgraph';
-import { Theme } from '../utils/styling';
+import { Theme } from '../types';
 
 // TODO: replace placeholder actions with new actions
 export type Action =
