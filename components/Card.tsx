@@ -11,13 +11,7 @@ const Card: FC<{
   const handleOnClick = () => onClick?.();
 
   return (
-    <div
-      onClick={handleOnClick}
-      className={cx(
-        'flex justify-between m-2 w-full rounded-lg border border-black shadow-sm',
-        className
-      )}
-    >
+    <div onClick={handleOnClick} className={cx('flex', className)}>
       {children}
     </div>
   );

@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 
 import { Token } from '../../data/nouns-builder-graph-types';
 import { getTokenImageURL } from '../../utils/decoding';
+import { toTrimmedAddress } from '../../utils/string';
 import Card from '../Card';
 
 interface Props extends PropsWithChildren {
@@ -22,8 +23,19 @@ const TokenCard = ({ token, onClick, children }: Props) => {
           height={320}
         />
       )}
-      <h4 className="">#{token.tokenId}</h4>
-      <span className="">Owner: {token.owner?.id}</span>
+      <div className="details">
+        <h4 className="">
+          {token.tokenContract.name} #{token.tokenId}
+        </h4>
+        <span className="">
+          Owned by:
+          <br />
+          <a href={`https://etherscan.io/address/${token.owner?.id}`}>
+            {' '}
+            {toTrimmedAddress(token.owner?.id)}
+          </a>
+        </span>
+      </div>
     </Card>
   );
 };
