@@ -18,7 +18,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       </NextHead>
       <div className="flex flex-col items-center justify-between w-screen min-h-screen">
         <Navigation />
-        <div className="flex-grow w-full px-5 max-w-7xl xl:px-0">
+        <div className="flex-grow w-full px-5 py-5 max-w-7xl xl:px-0">
           {children}
         </div>
         <Footer />
