@@ -10,7 +10,7 @@ const ProposalFull = ({ proposal }: Props) => {
       <span>
         {proposal.number}{' '}
         <span
-          className={`rounded-xl h-min p-0.5 ${
+          className={`proposal-status ${
             proposal.status === 'EXECUTED' ? 'bg-green-200' : `bg-red-200`
           }`}
         >
@@ -19,11 +19,11 @@ const ProposalFull = ({ proposal }: Props) => {
       </span>
       {/* votes */}
       <div className="flex justify-between w-full">
-        <div className="w-36 h-36 border">FOR VOTES: {proposal.forVotes}</div>
-        <div className="w-36 h-36 border">
+        <div className="votes-wrapper">FOR VOTES: {proposal.forVotes}</div>
+        <div className="votes-wrapper">
           AGAINST VOTES: {proposal.againstVotes}
         </div>
-        <div className="w-36 h-36 border">
+        <div className="votes-wrapper">
           ABSTAIN VOTES: {proposal.abstainVotes}
         </div>
       </div>
