@@ -12,7 +12,7 @@ module.exports = {
         sans: ['var(--font-inter)', ...fontFamily.sans],
         serif: ['var(--font-source-serif)', ...fontFamily.serif],
         tech: ['var(--font-martian-mono)', ...fontFamily.mono],
-        nouns: ['var(--font-local)', ...fontFamily.sans],
+        nouns: ['var(--font-nouns)', ...fontFamily.sans],
       },
     },
   },
