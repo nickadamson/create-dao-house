@@ -1,6 +1,6 @@
 import { Token } from '../data/nouns-builder-graph-types';
 
-export function getTokenImageURL(token: Token) {
+export function getTokenImageURL(token: Token): string | undefined {
   try {
     const encodedMetadata = token.tokenURI?.replace(
       'data:application/json;base64,',
