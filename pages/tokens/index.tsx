@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { GetServerSidePropsResult } from 'next';
 import { useRouter } from 'next/router';
-import cx from 'classNames';
+import cx from 'classnames';
 
 import TokenCard from '../../components/Token/TokenCard';
 import { Token } from '../../data/nouns-builder-graph-types';
