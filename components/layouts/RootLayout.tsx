@@ -4,6 +4,7 @@ import NextHead from 'next/head';
 import Navigation from '../Navigation';
 import Footer from '../Footer';
 import { useTheme } from '../../hooks/useTheme';
+import Hamburger from '../Hamburger';
 
 import FontWrapper from './Fonts/FontWrapper';
 
@@ -13,6 +14,8 @@ interface RootLayoutProps {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   const theme = useTheme();
+
+  const displayNav = theme === 'sleek';
   return (
     <>
       <NextHead>
@@ -25,8 +28,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
         <div
           className={`flex flex-col justify-between items-center w-screen min-h-screen ${theme}`}
         >
-          <Navigation />
-          <div className="flex-grow px-5 py-5 w-full max-w-7xl xl:px-0">
+          {displayNav ? <Navigation /> : <Hamburger />}
+          <div className="flex-grow w-full px-5 py-5 max-w-7xl xl:px-0">
             {children}
           </div>
           <Footer />
