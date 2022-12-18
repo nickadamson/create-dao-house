@@ -4,8 +4,15 @@ import { useRouter } from 'next/router';
 import { GovernorContract } from '../../data/nouns-builder-graph-types';
 import { getGovernanceDetails } from '../../data/subgraph';
 import ProposalCard from '../../components/Proposal/ProposalCard';
+import { ParsedContractURI } from '../../utils/decoding';
 
-export default function Vote({ gov }: { gov: GovernorContract }) {
+export default function Vote({
+  gov,
+  contractURI,
+}: {
+  gov: GovernorContract;
+  contractURI: ParsedContractURI;
+}) {
   const router = useRouter();
 
   return (
@@ -30,19 +37,22 @@ export default function Vote({ gov }: { gov: GovernorContract }) {
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
     gov: GovernorContract;
+    contractURI: ParsedContractURI;
   }>
 > => {
-  const gov = await getGovernanceDetails();
+  const details = await getGovernanceDetails();
 
-  if (!gov) {
+  if (!details) {
     return {
       notFound: true,
     };
   }
 
+  const { governorContract: gov, contractURI } = details;
   return {
     props: {
       gov,
+      contractURI,
     },
   };
 };

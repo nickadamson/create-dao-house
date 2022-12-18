@@ -10,6 +10,7 @@ import {
 import { GovernorContract } from '../data/nouns-builder-graph-types';
 import { DAODetails } from '../data/subgraph';
 import { Theme } from '../types';
+import { ParsedContractURI } from '../utils/decoding';
 
 // TODO: replace placeholder actions with new actions
 export type Action =
@@ -23,6 +24,7 @@ export interface InitialState {
     gov?: GovernorContract;
   };
   tokens: Record<string, never>;
+  contractURI: ParsedContractURI;
   theme: Theme;
 }
 
@@ -30,6 +32,12 @@ const initialState: InitialState = {
   home: {},
   vote: {},
   tokens: {},
+  contractURI: {
+    name: '',
+    description: '',
+    external_url: '',
+    image: '',
+  },
   theme: (process.env.NEXT_PUBLIC_THEME_STYLE as Theme) || 'nouns',
 };
 
