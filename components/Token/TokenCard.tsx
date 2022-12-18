@@ -12,9 +12,8 @@ interface Props extends PropsWithChildren {
 
 const TokenCard = ({ token, onClick, children }: Props) => {
   return (
-    <Card className="token-card" onClick={() => onClick?.()}>
+    <Card className="token-card hover:cursor" onClick={() => onClick?.()}>
       <Image
-        // need to  decode64 sigh
         src={getTokenImageURL(token)}
         alt={'Token #' + token.tokenId}
         width={320}
