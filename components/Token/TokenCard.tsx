@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 
 import { Token } from '../../data/nouns-builder-graph-types';
+import { getTokenImageURL } from '../../utils/decoding';
 import Card from '../Card';
 
 interface Props extends PropsWithChildren {
@@ -15,7 +16,7 @@ const TokenCard = ({ token, onClick, children }: Props) => {
       <div className="flex flex-col w-full h-full">
         <Image
           // need to  decode64 sigh
-          src={token.tokenURI ?? ''}
+          src={getTokenImageURL(token)}
           alt={'Token #' + token.tokenId}
           width={320}
           height={320}

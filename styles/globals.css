@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* @apply font-sans; */
+  }
   h1 {
     @apply text-2xl;
   }

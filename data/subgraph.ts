@@ -415,6 +415,7 @@ export const getDAOTokens = async (): Promise<Token[] | undefined> => {
     console.log({ error });
   }
 };
+
 export const getToken = async (tokenId: string): Promise<Token | undefined> => {
   try {
     const { token }: { token: Token } = await request(SUBGRAPH_URL, GET_TOKEN, {
