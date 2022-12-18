@@ -1,4 +1,5 @@
 import request, { gql } from 'graphql-request';
+import { parseContractURI, ParsedContractURI } from '../utils/decoding';
 
 import {
   AuctionContract,
@@ -55,7 +56,7 @@ export interface DAOShort {
   auctionContract: { id: string };
   governorContract: { id: string };
   metadataContract: { id: string };
-  tokenContract: { id: string; name: string };
+  tokenContract: { id: string; name: string; contractURI: string };
   treasuryContract: { id: string };
 }
 
@@ -74,6 +75,7 @@ const DAO_SHORT_FRAGMENT = gql`
     tokenContract {
       id
       name
+      contractURI
     }
     treasuryContract {
       id
@@ -167,6 +169,7 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     }
     tokenContract {
       name
+      contractURI
     }
   }
 `;
@@ -299,6 +302,7 @@ const GET_DAO_TOKENS = gql`
   query getDAOTokens($addr: String!) {
     dao(id: $addr) {
       tokenContract {
+        contractURI
         tokens {
           ...TokenDetails
         }
@@ -333,7 +337,7 @@ export const getDAOShort = async (): Promise<DAOShort | undefined> => {
       SUBGRAPH_URL,
       GET_DAO_ADDRESSES,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
 
@@ -343,33 +347,51 @@ export const getDAOShort = async (): Promise<DAOShort | undefined> => {
   }
 };
 
-export const getDAODetails = async (): Promise<DAODetails | undefined> => {
+const getParsedContractURI = (dao: DAOShort): ParsedContractURI | undefined => {
+  const parsed = parseContractURI(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    dao!.tokenContract.contractURI!
+  );
+
+  if (parsed) {
+    const { name, description, external_url, image } = parsed;
+
+    return { name, description, image, external_url };
+  }
+};
+
+export const getDAODetails = async (): Promise<
+  { dao: DAODetails; contractURI: ParsedContractURI } | undefined
+> => {
   try {
-    const { dao }: { dao?: DAODetails } = await request(
+    const { dao }: { dao: DAODetails } = await request(
       SUBGRAPH_URL,
       GET_DAO_DETAILS,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
+    const contractURI = getParsedContractURI(dao)!;
 
-    return dao;
+    return { dao, contractURI };
   } catch (error) {
     console.log({ error });
   }
 };
 
 export const getGovernanceDetails = async (): Promise<
-  GovernorContract | undefined
+  | { governorContract: GovernorContract; contractURI: ParsedContractURI }
+  | undefined
 > => {
   try {
     const { dao }: { dao: DAOShort } = await request(
       SUBGRAPH_URL,
       GET_DAO_ADDRESSES,
       {
-        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+        addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
+    const contractURI = getParsedContractURI(dao)!;
 
     try {
       const { governorContract }: { governorContract: GovernorContract } =
@@ -377,7 +399,7 @@ export const getGovernanceDetails = async (): Promise<
           addr: dao.governorContract.id,
         });
 
-      return governorContract;
+      return { governorContract, contractURI };
     } catch (error) {
       console.log({ error });
     }
@@ -388,7 +410,9 @@ export const getGovernanceDetails = async (): Promise<
 
 export const getProposalDetails = async (
   proposalId: string
-): Promise<Proposal | undefined> => {
+): Promise<
+  { proposal: Proposal; contractURI: ParsedContractURI } | undefined
+> => {
   try {
     const { proposal }: { proposal: Proposal } = await request(
       SUBGRAPH_URL,
@@ -397,34 +421,43 @@ export const getProposalDetails = async (
         proposalId: proposalId.toLowerCase(),
       }
     );
+    const dao = await getDAOShort()!;
+    const contractURI = getParsedContractURI(dao!)!;
 
-    return proposal;
+    return { proposal, contractURI };
   } catch (error) {
     console.log({ error });
   }
 };
 
-export const getDAOTokens = async (): Promise<Token[] | undefined> => {
+export const getDAOTokens = async (): Promise<
+  { tokens: Token[]; contractURI: ParsedContractURI } | undefined
+> => {
   try {
     const { dao }: { dao: Dao } = await request(SUBGRAPH_URL, GET_DAO_TOKENS, {
-      addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS,
+      addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
     });
+    const contractURI = getParsedContractURI(dao)!;
 
     const { tokens } = dao.tokenContract;
 
-    return tokens;
+    return { tokens, contractURI };
   } catch (error) {
     console.log({ error });
   }
 };
 
-export const getToken = async (tokenId: string): Promise<Token | undefined> => {
+export const getToken = async (
+  tokenId: string
+): Promise<{ token: Token; contractURI: ParsedContractURI } | undefined> => {
   try {
     const { token }: { token: Token } = await request(SUBGRAPH_URL, GET_TOKEN, {
-      tokenId: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS}-${tokenId}`,
+      tokenId: `${process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase()}-${tokenId}`,
     });
+    const dao = await getDAOShort();
+    const contractURI = getParsedContractURI(dao!)!;
 
-    return token;
+    return { token, contractURI };
   } catch (error) {
     console.log({ error });
   }

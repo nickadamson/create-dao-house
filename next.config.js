@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['api.zora.co'],
+    domains: ['api.zora.co', 'ipfs.io'],
   },
 };
 
