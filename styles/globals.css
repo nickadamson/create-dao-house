@@ -3,10 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* @apply font-sans; */
-  }
   h1 {
     @apply text-2xl;
+  }
+
+  button {
+  }
+}
+
+@layer components {
+  .token-card {
+    @apply flex flex-col w-80 h-80;
+  }
+}
+
+@layer utility {
+  .sleek {
+    button {
+      @apply text-white bg-orange-500 border-4 border-green-500;
+    }
+  }
+
+  .modern {
+    button {
+      @apply text-black bg-yellow-500 border-2 border-purple-500;
+    }
+  }
+
+  .nouns {
+    button {
+      @apply text-gray-500 bg-red-500 border-8 border-blue-500;
+    }
   }
 }

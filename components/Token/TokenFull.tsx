@@ -11,15 +11,11 @@ interface Props extends PropsWithChildren {
 }
 
 const TokenFull = ({ token, children }: Props) => {
-  console.log({ token });
+  const imgUrl = getTokenImageURL(token);
   return (
     <div className="flex flex-col w-full h-full">
       <div className="relative p-12 m-8 w-full">
-        <Image
-          src={getTokenImageURL(token)}
-          alt={'Token #' + token.tokenId}
-          fill
-        />
+        {imgUrl && <Image src={imgUrl} alt={'Token #' + token.tokenId} fill />}
       </div>
       <>
         <h4 className="">#{token.tokenId}</h4>

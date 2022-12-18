@@ -11,19 +11,19 @@ interface Props extends PropsWithChildren {
 }
 
 const TokenCard = ({ token, onClick, children }: Props) => {
+  const imgUrl = getTokenImageURL(token);
   return (
-    <Card className="hover:cursor w-80 h-80" onClick={() => onClick?.()}>
-      <div className="flex flex-col w-full h-full">
+    <Card className="token-card hover:cursor" onClick={() => onClick?.()}>
+      {imgUrl && (
         <Image
-          // need to  decode64 sigh
-          src={getTokenImageURL(token)}
+          src={imgUrl}
           alt={'Token #' + token.tokenId}
           width={320}
           height={320}
         />
-        <h4 className="">#{token.tokenId}</h4>
-        <span className="">Owner: {token.owner?.id}</span>
-      </div>
+      )}
+      <h4 className="">#{token.tokenId}</h4>
+      <span className="">Owner: {token.owner?.id}</span>
     </Card>
   );
 };

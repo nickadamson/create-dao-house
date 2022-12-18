@@ -20,15 +20,16 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" /> */}
       </NextHead>
 
-      <DynamicFontWrapper>
-        <div className="flex flex-col justify-between items-center w-screen min-h-screen">
-          <Navigation />
-          <div className="flex-grow px-5 py-5 w-full max-w-7xl xl:px-0">
-            {children}
-          </div>
-          <Footer />
+      {/* <DynamicFontWrapper> */}
+      <div className="flex flex-col justify-between items-center w-screen min-h-screen">
+        <Navigation />
+        {/* <button>HIIIIIIIIII</button> */}
+        <div className="flex-grow px-5 py-5 w-full max-w-7xl xl:px-0">
+          {children}
         </div>
-      </DynamicFontWrapper>
+        <Footer />
+      </div>
+      {/* </DynamicFontWrapper> */}
     </>
   );
 };
