@@ -1,10 +1,37 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useCallback } from 'react';
 
-import NavigationLink from './NavigationLink';
+import { useDataStore } from '../hooks/useDataStore';
+import { useTheme } from '../hooks/useTheme';
+import { Theme } from '../types';
+import { isLocalHost } from '../utils/isLocalHost';
+
+import Button from './Button';
 import Logo from './Logo';
+import NavigationLink from './NavigationLink';
 
 const Navigation = () => {
+  const { dispatch } = useDataStore();
+  const theme = useTheme();
+
+  const toggleTheme = useCallback(() => {
+    const themes: Theme[] = ['modern', 'sleek', 'nouns'];
+
+    const currentThemeIndex = themes.indexOf(theme);
+
+    if (currentThemeIndex >= themes.length - 1) {
+      dispatch?.({ type: 'OVERRIDE_THEME', value: themes[0] });
+    } else {
+      dispatch?.({
+        type: 'OVERRIDE_THEME',
+        value: themes[currentThemeIndex + 1],
+      });
+    }
+
+    console.log(currentThemeIndex);
+  }, [theme, dispatch]);
+
   return (
     <NavigationMenu.Root className="flex justify-center w-full z-[1] text-center h-full max-h-16 bg-slate-400">
       <NavigationMenu.List className="flex justify-center w-screen p-1 m-0 text-black list-none max-w-7xl">
@@ -15,6 +42,11 @@ const Navigation = () => {
               <Logo />
             </NavigationLink>
           </NavigationMenu.Item>
+          {isLocalHost() && (
+            <NavigationMenu.Item>
+              <Button buttonText="Toggle Theme" onClick={toggleTheme} />
+            </NavigationMenu.Item>
+          )}
           {/* center nav */}
           <NavigationMenu.Sub className="flex justify-end w-1/2 ml-auto mr-0">
             <NavigationMenu.Item className="w-48">
