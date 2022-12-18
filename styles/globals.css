@@ -4,20 +4,35 @@
 @tailwind utilities;
 
 @layer base {
-  h1 {
-    @apply text-2xl;
-  }
-
   .sleek {
     @apply text-white bg-black;
+
+    .landing-title {
+      @apply mb-4 text-7xl text-center;
+    }
+    .landing-desc {
+      @apply text-5xl italic text-center;
+    }
   }
 
   .modern {
     @apply bg-gradient-to-bl from-gray-50 via-gray-100 to-gray-200;
+    .landing-title {
+      @apply mb-4 text-7xl text-center;
+    }
+    .landing-desc {
+      @apply text-5xl text-center;
+    }
   }
 
   .nouns {
     @apply text-black bg-stone-100;
+    .landing-title {
+      @apply mb-4 text-7xl text-center;
+    }
+    .landing-desc {
+      @apply text-5xl text-center;
+    }
   }
 
   .nav-root {
