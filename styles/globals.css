@@ -22,6 +22,7 @@
 
   .modern {
     @apply bg-gradient-to-bl from-gray-50 via-gray-100 to-gray-200;
+
     .landing-title {
       @apply mb-4 text-7xl text-center;
     }
@@ -36,12 +37,15 @@
 
   .nouns {
     @apply text-black bg-stone-100;
+
     .landing-title {
       @apply mb-4 text-7xl text-center;
     }
+
     .landing-desc {
       @apply text-5xl text-center;
     }
+
     .footer {
       @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
@@ -69,6 +73,7 @@
     .img {
       @apply relative h-[50vh] w-[50vh] my-auto;
     }
+
     .details {
       @apply flex flex-col;
 
