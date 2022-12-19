@@ -1,6 +1,14 @@
 # Create DAO House
 
+![gif](./public/template.gif)
+
 A repo to bootstrap your Nouns Builder DAO's website.
+
+Here are 3 DAO site examples using this template:
+
+- https://p---a.vercel.app/ (sleek)
+- https://builder-dao.vercel.app/ (modern)
+- https://xnouns.vercel.app/ (classic nouns)
 
 ## Features
 
