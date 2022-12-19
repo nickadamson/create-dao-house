@@ -165,6 +165,9 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     tokenURI
     auction {
       id
+      settled
+      startTime
+      endTime
       winningBid {
         amount
         extended
