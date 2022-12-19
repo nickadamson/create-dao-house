@@ -58,6 +58,26 @@
       @apply flex flex-col justify-between px-3 py-2 h-full;
     }
   }
+  .token-full {
+    @apply flex items-center justify-center gap-6 w-full h-full min-h-[80vh];
+
+    .img {
+      @apply relative h-[50vh] w-[50vh] my-auto;
+    }
+    .details {
+      @apply flex flex-col;
+
+      .id {
+        /* @apply; */
+      }
+      .owner {
+        /* @apply; */
+      }
+      .price {
+        /* @apply; */
+      }
+    }
+  }
 
   .auction-wrapper {
     @apply flex gap-8 p-12 m-8;

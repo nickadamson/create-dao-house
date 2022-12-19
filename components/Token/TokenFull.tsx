@@ -13,18 +13,18 @@ interface Props extends PropsWithChildren {
 const TokenFull = ({ token, children }: Props) => {
   const imgUrl = getTokenImageURL(token);
   return (
-    <div className="flex flex-col w-full h-full">
-      <div className="relative p-12 m-8 w-full">
+    <div className="token-full">
+      <div className="img">
         {imgUrl && <Image src={imgUrl} alt={'Token #' + token.tokenId} fill />}
       </div>
-      <>
-        <h4 className="">#{token.tokenId}</h4>
-        <span className="">Owner: {token.owner?.id}</span>
-        <span className="">
+      <div className="details">
+        <h4 className="id">#{token.tokenId}</h4>
+        <span className="owner">Owner: {token.owner?.id}</span>
+        <span className="price">
           Purchase Price:{' '}
           {formatEther(token.auction?.winningBid?.amount ?? BigNumber.from(0))}
         </span>
-      </>
+      </div>
     </div>
   );
 };
