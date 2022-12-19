@@ -2,7 +2,7 @@ import { Theme } from '../types';
 
 type ThemedStyles = Record<string, string>;
 
-interface AllStyles {
+export interface ComponentStyles {
   nouns: ThemedStyles;
   modern: ThemedStyles;
   sleek: ThemedStyles;
@@ -10,7 +10,7 @@ interface AllStyles {
 
 interface GetThemedStyleArgs {
   theme: Theme;
-  styles: AllStyles;
+  styles: ComponentStyles;
 }
 
 export const getThemedStyles: (arg0: GetThemedStyleArgs) => ThemedStyles = ({
