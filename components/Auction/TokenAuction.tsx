@@ -21,8 +21,8 @@ const TokenAuction = ({ auction, children }: Props) => {
   );
 
   return (
-    <div className="flex p-12 m-8">
-      <div className="flex justify-center items-center w-1/2">
+    <div className="auction-wrapper">
+      <div className="img">
         <Image
           src={imgUrl}
           alt={'Token #' + auction.token?.tokenId}
@@ -30,12 +30,13 @@ const TokenAuction = ({ auction, children }: Props) => {
           height={320}
         />
       </div>
-      <div className="flex flex-col justify-center w-1/2">
-        <h4 className="">#{auction.token?.tokenId}</h4>
-        <span className="">
+      <div className="details">
+        <h4 className="id">#{auction.token?.tokenId}</h4>
+
+        <span className="bid">
           Current Bid: {formatEther(orderedBids[orderedBids.length - 1].amount)}
         </span>
-        <span className="">
+        <span className="bidder">
           Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
         </span>
       </div>

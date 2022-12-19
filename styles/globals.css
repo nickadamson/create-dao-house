@@ -55,7 +55,31 @@
     @apply flex flex-col justify-between w-80 border border-gray-400;
 
     .details {
-      @apply flex flex-col justify-between h-full px-3 py-2;
+      @apply flex flex-col justify-between px-3 py-2 h-full;
+    }
+  }
+
+  .auction-wrapper {
+    @apply flex gap-8 p-12 m-8;
+
+    .img {
+      @apply flex justify-end items-center w-1/2;
+    }
+
+    .details {
+      @apply flex flex-col justify-center w-1/2;
+
+      .id {
+        /* @apply; */
+      }
+
+      .bid {
+        /* @apply; */
+      }
+
+      .bidder {
+        /* @apply; */
+      }
     }
   }
 
