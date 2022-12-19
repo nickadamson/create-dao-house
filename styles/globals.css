@@ -114,17 +114,25 @@
   }
 
   .votes-wrapper {
-    @apply w-36 h-36 bg-gray-500;
+    @apply flex flex-col gap-4 justify-center p-4 w-fit h-fit min-w-[200px];
+
+    .ProgressRoot {
+      @apply overflow-hidden relative w-full h-6 bg-gray-400 rounded-full;
+    }
+
+    .ProgressIndicator {
+      @apply w-full h-full bg-gray-600 transition-transform duration-500 ease-in-out;
+    }
   }
 
   .proposal-card {
-    @apply flex flex-col justify-between p-4 m-4 w-full hover:cursor-pointer;
+    @apply flex flex-col justify-between p-4 m-4 hover:cursor-pointer;
 
     .details {
       @apply flex justify-between w-full;
 
       .title {
-        @apply text-2xl;
+        @apply w-full text-2xl;
       }
 
       .status {
@@ -136,6 +144,10 @@
       }
 
       .pending {
+        @apply bg-yellow-200;
+      }
+
+      .vetoed {
         @apply bg-red-200;
       }
     }
@@ -144,17 +156,29 @@
       /* @apply ; */
     }
   }
+
+  .proposal-full {
+    .status {
+      @apply p-2 my-auto text-lg h-min;
+    }
+
+    .executed {
+      @apply bg-green-200;
+    }
+
+    .pending {
+      @apply bg-yellow-200;
+    }
+
+    .vetoed {
+      @apply bg-red-200;
+    }
+  }
 }
 
 @layer components {
   .sleek {
-    .token-card {
-      @apply text-white bg-black;
-    }
-
-    .proposal-card {
-      @apply px-8 py-4 border border-white;
-
+    .proposal-full {
       .status {
         @apply p-0 font-thin tracking-wider text-opacity-90 bg-transparent;
       }
@@ -165,6 +189,46 @@
 
       .pending {
         @apply text-yellow-300;
+      }
+
+      .vetoed {
+        @apply text-red-300;
+      }
+    }
+
+    .votes-wrapper {
+      @apply text-center border border-white;
+
+      .ProgressRoot {
+        @apply bg-black border border-gray-700;
+      }
+
+      .ProgressIndicator {
+        @apply bg-white;
+      }
+    }
+
+    .token-card {
+      @apply text-white bg-black;
+    }
+
+    .proposal-card {
+      @apply p-4 mx-4 border border-white;
+
+      .status {
+        @apply justify-center p-0 w-1/6 font-thin tracking-wider text-center text-opacity-90 bg-transparent;
+      }
+
+      .executed {
+        @apply text-lime-300;
+      }
+
+      .pending {
+        @apply text-yellow-300;
+      }
+
+      .vetoed {
+        @apply text-red-300;
       }
     }
 

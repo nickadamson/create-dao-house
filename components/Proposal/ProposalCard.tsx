@@ -12,7 +12,6 @@ interface Props extends PropsWithChildren {
 const ProposalCard = ({ proposal, onClick, children }: Props) => {
   return (
     <Card className="proposal-card" onClick={() => onClick?.()}>
-      {/* <div className=""> */}
       <div className="details">
         <h3 className="title">
           {proposal.number}: {proposal.title}
@@ -22,13 +21,10 @@ const ProposalCard = ({ proposal, onClick, children }: Props) => {
             proposal.status.slice(0, 1) +
             proposal.status.slice(1).toLocaleLowerCase()
           }
-          className={`status ${
-            proposal.status === 'EXECUTED' ? 'executed' : 'pending'
-          }`}
+          className={`status ${proposal.status.toLowerCase()}`}
         />
       </div>
-      <p className="timeleft">TIMELEFT</p>
-      {/* </div> */}
+      {/* <p className="timeleft">TIMELEFT</p> */}
     </Card>
   );
 };
