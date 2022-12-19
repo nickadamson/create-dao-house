@@ -52,12 +52,13 @@
   }
 
   .token-card {
-    @apply flex flex-col justify-between w-80 border border-gray-400;
+    @apply flex flex-col justify-between w-80 border border-gray-400 hover:cursor-pointer;
 
     .details {
       @apply flex flex-col justify-between px-3 py-2 h-full;
     }
   }
+
   .token-full {
     @apply flex items-center justify-center gap-6 w-full h-full min-h-[80vh];
 
@@ -108,7 +109,7 @@
   }
 
   .proposal-card {
-    @apply justify-between p-4 m-4 w-full;
+    @apply justify-between p-4 m-4 w-full hover:cursor-pointer;
   }
 
   .proposal-status {

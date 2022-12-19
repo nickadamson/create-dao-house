@@ -11,7 +11,7 @@ interface Props extends PropsWithChildren {
 
 const ProposalCard = ({ proposal, onClick, children }: Props) => {
   return (
-    <Card className="proposal-card hover:cursor" onClick={() => onClick?.()}>
+    <Card className="proposal-card" onClick={() => onClick?.()}>
       <div className="flex flex-col w-full">
         <div className="flex justify-between w-full">
           <h3 className="">
