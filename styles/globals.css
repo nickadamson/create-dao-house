@@ -51,6 +51,10 @@
     @apply flex justify-center w-full z-[1] text-center h-full max-h-16;
   }
 
+  .page-title {
+    @apply mx-auto my-4 text-xl text-center;
+  }
+
   .token-card {
     @apply flex flex-col justify-between w-80 border border-gray-400 hover:cursor-pointer;
 

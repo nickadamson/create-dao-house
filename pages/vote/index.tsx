@@ -18,7 +18,7 @@ export default function Vote({
   return (
     <>
       {/* DAO title */}
-      <div className="text-xl">{gov.tokenContract.name} DAO</div>
+      <div className="page-title">{contractURI.name} Governance</div>
       {/* proposals */}
 
       {gov.proposals.map((proposal) => {
