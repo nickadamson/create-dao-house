@@ -29,8 +29,7 @@ const Navigation = () => {
           </NavigationMenu.Sub>
           {/* wallet */}
           <NavigationMenu.Item className="flex justify-end">
-            <ConnectButton />
-            {isConnected && <Account />}
+            {isConnected ? <Account /> : <ConnectButton />}
           </NavigationMenu.Item>
 
           {/* <NavigationMenu.Item className='border border-red-500 border-solid'> */}

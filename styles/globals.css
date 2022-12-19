@@ -12,7 +12,7 @@
     }
 
     .footer {
-      @apply flex items-center justify-center w-full h-12 text-center border-t;
+      @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
   }
 
@@ -24,7 +24,7 @@
     }
 
     .footer {
-      @apply flex items-center justify-center w-full h-12 text-center border-t;
+      @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
   }
 
@@ -36,7 +36,7 @@
     }
 
     .footer {
-      @apply flex items-center justify-center w-full h-12 text-center border-t;
+      @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
   }
 
@@ -53,10 +53,10 @@
   }
 
   .token-card {
-    @apply flex flex-col justify-between h-full border border-gray-400 place-self-center hover:cursor-pointer;
+    @apply flex flex-col justify-between place-self-center h-full border border-gray-400 hover:cursor-pointer;
 
     .details {
-      @apply flex flex-col justify-between h-full px-3 py-2;
+      @apply flex flex-col justify-between px-3 py-2 h-full;
     }
   }
 
@@ -87,30 +87,49 @@
   }
 
   .auction-wrapper {
-    @apply flex gap-8 p-12 m-8;
+    @apply flex flex-col gap-8 justify-between p-12 m-8 h-full sm:flex-row;
 
     .img {
-      @apply flex items-center justify-end w-1/2;
+      @apply flex justify-center items-center mx-auto w-full h-full sm:w-1/2 sm:justify-end;
     }
 
     .details {
-      @apply flex flex-col justify-center w-1/2;
+      @apply flex mx-auto sm:mx-0 justify-between items-center p-2 m-2 w-[320px] border-y;
 
-      .id {
-        /* @apply; */
-      }
+      .current-bid {
+        @apply flex flex-col w-1/2 text-xl md:border-r;
 
-      .bid {
-        /* @apply; */
-      }
-
-      .bidder {
-        /* @apply; */
+        .string {
+          @apply text-black text-opacity-80;
+        }
       }
 
       .timeleft {
+        @apply flex flex-col text-lg text-right;
+      }
+    }
+
+    .place-bid {
+      @apply flex gap-4;
+      .input {
+        @apply p-1 mr-2 text-gray-500 bg-transparent border;
+      }
+    }
+
+    .bidder {
+      @apply flex flex-col;
+
+      .id {
         /* @apply ; */
       }
+    }
+  }
+
+  .token-card {
+    @apply flex flex-col justify-between place-self-center h-full border border-gray-400 hover:cursor-pointer;
+
+    .details {
+      @apply flex flex-col justify-between px-3 py-2 h-full;
     }
   }
 
@@ -118,11 +137,11 @@
     @apply flex flex-col gap-4 justify-center p-4 w-fit h-fit min-w-[200px];
 
     .ProgressRoot {
-      @apply relative w-full h-6 overflow-hidden bg-gray-400 rounded-full;
+      @apply overflow-hidden relative w-full h-6 bg-gray-400 rounded-full;
     }
 
     .ProgressIndicator {
-      @apply w-full h-full transition-transform duration-500 ease-in-out bg-gray-600;
+      @apply w-full h-full bg-gray-600 transition-transform duration-500 ease-in-out;
     }
   }
 
@@ -154,7 +173,7 @@
     }
 
     .timeleft {
-      /* @apply ; */
+      @apply w-36 h-36 bg-gray-500;
     }
   }
 
@@ -180,12 +199,12 @@
 @layer components {
   .sleek {
     .token-grid {
-      @apply grid gap-2 auto-cols-auto auto-rows-auto sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5;
+      @apply grid auto-cols-auto auto-rows-auto gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5;
     }
 
     .proposal-full {
       .status {
-        @apply p-0 font-thin tracking-wider bg-transparent text-opacity-90;
+        @apply p-0 font-thin tracking-wider text-opacity-90 bg-transparent;
       }
 
       .executed {
@@ -229,20 +248,33 @@
       @apply relative border-0;
 
       .details {
-        @apply absolute flex-col items-center justify-center hidden w-full h-full bg-black place-self-center bg-opacity-40;
+        @apply hidden absolute flex-col justify-center items-center place-self-center w-full h-full bg-black bg-opacity-40;
       }
     }
     .token-card:hover {
       .details {
         @apply flex;
       }
+
+      .bidder {
+        @apply flex flex-col;
+
+        .string {
+          @apply hidden;
+        }
+
+        .id::before {
+          content: 'by ';
+        }
+      }
     }
 
     .proposal-card {
       @apply p-4 mx-4 border border-white;
+      /* @apply rounded-sm border-2 border-black; */
 
       .status {
-        @apply justify-center w-1/6 p-0 font-thin tracking-wider text-center bg-transparent text-opacity-90;
+        @apply justify-center p-0 w-1/6 font-thin tracking-wider text-center text-opacity-90 bg-transparent;
       }
 
       .executed {
@@ -259,7 +291,7 @@
     }
 
     .timeleft {
-      @apply font-light text-opacity-50 text-gray-50;
+      @apply font-light text-gray-50 text-opacity-50;
     }
   }
 
@@ -269,7 +301,7 @@
     }
 
     .proposal-card {
-      @apply border border-black rounded-lg shadow-xl;
+      @apply rounded-lg border border-black shadow-xl;
     }
 
     .proposal-status {
@@ -287,7 +319,7 @@
     }
 
     .proposal-card {
-      @apply border border-black rounded-lg shadow-xl;
+      @apply rounded-lg border border-black shadow-xl;
     }
 
     .proposal-status {
