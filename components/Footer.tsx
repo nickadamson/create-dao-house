@@ -27,7 +27,7 @@ const Footer: FC = () => {
   }, [theme, dispatch]);
 
   return (
-    <div className="flex items-center justify-center w-full h-12 text-center bg-slate-400">
+    <div className="footer">
       {isLocalHost() && (
         <Button onClick={toggleTheme} buttonText="Toggle Theme" />
       )}

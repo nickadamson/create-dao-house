@@ -18,7 +18,7 @@ const Logo = () => {
         width={32}
         onError={() => setHidden(true)}
       />
-      {contractURI.name}
+      {process.env.NEXT_PUBLIC_NAVBAR_TITLE ?? contractURI.name}
     </div>
   );
 };

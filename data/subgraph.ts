@@ -2,6 +2,7 @@ import request, { gql } from 'graphql-request';
 import { parseContractURI, ParsedContractURI } from '../utils/decoding';
 
 import {
+  Auction,
   AuctionContract,
   Dao,
   GovernorContract,
@@ -146,7 +147,8 @@ const AUCTION_BID_DETAILS_FRAGMENT = gql`
   fragment AuctionBidDetails on AuctionBid {
     id
     amount
-    transactionHash
+    extended
+    blockTimestamp
     auction {
       id
     }
@@ -312,6 +314,7 @@ const GET_DAO_TOKENS = gql`
 
   ${TOKEN_DETAILS_FRAGMENT}
 `;
+
 const GET_TOKEN = gql`
   query getToken($tokenId: String!) {
     token(id: $tokenId) {
@@ -320,6 +323,16 @@ const GET_TOKEN = gql`
   }
 
   ${TOKEN_DETAILS_FRAGMENT}
+`;
+
+const GET_AUCTION_DETAILS = gql`
+  query getActiveAuction($auctionId: String!) {
+    auction(id: $auctionId) {
+      ...AuctionDetails
+    }
+  }
+
+  ${AUCTION_DETAILS_FRAGMENT}
 `;
 
 export interface DAODetails {
@@ -360,8 +373,25 @@ const getParsedContractURI = (dao: DAOShort): ParsedContractURI | undefined => {
   }
 };
 
+const getActiveAuction = async (
+  dao: DAODetails
+): Promise<Auction | undefined> => {
+  try {
+    const { auction } = await request(SUBGRAPH_URL, GET_AUCTION_DETAILS, {
+      auctionId: `${dao.auctionContract.id}-${
+        Number(dao.tokenContract.totalSupply) - 1
+      }`,
+    });
+
+    return auction;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const getDAODetails = async (): Promise<
-  { dao: DAODetails; contractURI: ParsedContractURI } | undefined
+  | { dao: DAODetails; activeAuction: Auction; contractURI: ParsedContractURI }
+  | undefined
 > => {
   try {
     const { dao }: { dao: DAODetails } = await request(
@@ -371,9 +401,12 @@ export const getDAODetails = async (): Promise<
         addr: process.env.NEXT_PUBLIC_DAO_TOKEN_ADDRESS?.toLowerCase(),
       }
     );
+
     const contractURI = getParsedContractURI(dao)!;
 
-    return { dao, contractURI };
+    const activeAuction = (await getActiveAuction(dao))!;
+
+    return { dao, activeAuction, contractURI };
   } catch (error) {
     console.log({ error });
   }

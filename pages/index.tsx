@@ -1,30 +1,36 @@
 import { GetServerSidePropsResult } from 'next';
-import { useAccount } from 'wagmi';
 import Image from 'next/image';
 
-import { Account } from '../components/Account';
 import { DAODetails, getDAODetails } from '../data/subgraph';
-import { parseContractURI, ParsedContractURI } from '../utils/decoding';
+import { ParsedContractURI } from '../utils/decoding';
 import { ipfsImage } from '../utils/string';
+import { Auction } from '../data/nouns-builder-graph-types';
+import TokenAuction from '../components/Auction/TokenAuction';
 
 export default function Home({
   daoDetails,
+  activeAuction,
   contractURI,
 }: {
   daoDetails: DAODetails;
+  activeAuction: Auction;
   contractURI: ParsedContractURI;
 }) {
-  const { isConnected } = useAccount();
-
   const { name, description, image } = contractURI;
   return (
     <>
-      {isConnected && <Account />}
       <h1 className="landing-title">{name}</h1>
+      {/* Daily Auction */}
+      <TokenAuction auction={activeAuction} />
+      {/* Contract Image */}
+      <Image
+        className="mx-auto"
+        alt="dao image"
+        src={ipfsImage(image)}
+        height={100}
+        width={100}
+      />
       <h2 className="landing-desc">{description}</h2>
-      <Image alt="dao image" src={ipfsImage(image)} height={100} width={100} />
-      {/* <TokenAuction auction={auction} /> */}
-      {/* {JSON.stringify(daoDetails)} */}
     </>
   );
 }
@@ -32,6 +38,7 @@ export default function Home({
 export const getServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
     daoDetails: DAODetails;
+    activeAuction: Auction;
     contractURI: ParsedContractURI;
   }>
 > => {
@@ -43,11 +50,12 @@ export const getServerSideProps = async (): Promise<
     };
   }
 
-  const { dao: daoDetails, contractURI } = details;
+  const { dao: daoDetails, activeAuction, contractURI } = details;
 
   return {
     props: {
       daoDetails,
+      activeAuction,
       contractURI,
     },
   };
