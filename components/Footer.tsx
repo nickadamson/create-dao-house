@@ -29,7 +29,10 @@ const Footer: FC = () => {
   return (
     <div className="footer">
       {isLocalHost() && (
-        <Button onClick={toggleTheme} buttonText="Toggle Theme" />
+        <Button
+          onClick={toggleTheme}
+          buttonText={`Toggle Theme - Current: ${theme}`}
+        />
       )}
     </div>
   );

@@ -14,16 +14,27 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({ closeMenu }, ref) => (
     className="fixed top-0 bottom-0 left-0 w-60 max-w-[80%] hamburger-menu bg-white"
     ref={ref}
   >
-    <Button buttonType="button" onClick={() => closeMenu()}>
+    <Button
+      buttonType="button"
+      onClick={() => closeMenu()}
+      className="absolute top-5 left-5"
+    >
       <CloseIcon />
     </Button>
-    <div className="flex flex-col w-full h-full text-lg">
+    <div className="flex flex-col w-full h-full pt-12 text-lg">
       <Link
         href="/"
         className="flex justify-center h-24"
         onClick={() => closeMenu()}
       >
         <Logo className="hamburger-logo" />
+      </Link>
+      <Link
+        href="/"
+        className="flex justify-center h-24 border-t border-black"
+        onClick={() => closeMenu()}
+      >
+        <span className="self-center">Home</span>
       </Link>
       <Link
         href="/vote"
@@ -64,7 +75,7 @@ const Hamburger: FC = () => {
 
   return (
     <>
-      <Button className="fixed lg:left-36" onClick={() => setIsOpen(!isOpen)}>
+      <Button className="fixed top-5 left-5" onClick={() => setIsOpen(!isOpen)}>
         <HamburgerIcon />
       </Button>
       {isOpen && <Menu ref={menuRef} closeMenu={() => setIsOpen(false)} />}
