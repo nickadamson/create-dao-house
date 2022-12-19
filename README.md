@@ -4,6 +4,12 @@
 
 A repo to bootstrap your Nouns Builder DAO's website.
 
+Here are 3 DAO site examples using this template:
+
+- https://p---a.vercel.app/ (sleek)
+- https://builder-dao.vercel.app/ (modern)
+- https://xnouns.vercel.app/ (classic nouns)
+
 ## Features
 
 1. uses [NextJS](https://nextjs.org/); Server-Side Rendering
