@@ -12,21 +12,23 @@ interface Props extends PropsWithChildren {
 const ProposalCard = ({ proposal, onClick, children }: Props) => {
   return (
     <Card className="proposal-card" onClick={() => onClick?.()}>
-      <div className="flex flex-col w-full">
-        <div className="flex justify-between w-full">
-          <h3 className="">
-            {proposal.number}
-            {proposal.title}
-          </h3>
-          <Label
-            text={proposal.status}
-            className={`proposal-status ${
-              proposal.status === 'EXECUTED' ? 'bg-green-200' : `bg-red-200`
-            }`}
-          />
-        </div>
-        <p className="">TIMELEFT</p>
+      {/* <div className=""> */}
+      <div className="details">
+        <h3 className="title">
+          {proposal.number}: {proposal.title}
+        </h3>
+        <Label
+          text={
+            proposal.status.slice(0, 1) +
+            proposal.status.slice(1).toLocaleLowerCase()
+          }
+          className={`status ${
+            proposal.status === 'EXECUTED' ? 'executed' : 'pending'
+          }`}
+        />
       </div>
+      <p className="timeleft">TIMELEFT</p>
+      {/* </div> */}
     </Card>
   );
 };
