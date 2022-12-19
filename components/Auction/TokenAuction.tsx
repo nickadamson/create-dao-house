@@ -1,4 +1,4 @@
-import { formatEther } from 'ethers/lib/utils.js';
+import { formatEther, parseEther } from 'ethers/lib/utils.js';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 import { useAccount } from 'wagmi';
@@ -32,13 +32,17 @@ const TokenAuction = ({ auction, children }: Props) => {
       </div>
       <div className="details">
         <h4 className="id">#{auction.token?.tokenId}</h4>
-
         <span className="bid">
-          Current Bid: {formatEther(orderedBids[orderedBids.length - 1].amount)}
+          Current Bid:{' '}
+          {formatEther(
+            orderedBids[orderedBids.length - 1]?.amount ?? parseEther('0')
+          )}
         </span>
-        <span className="bidder">
-          Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
-        </span>
+        {orderedBids.length > 0 && (
+          <span className="bidder">
+            Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
+          </span>
+        )}
       </div>
     </div>
   );
