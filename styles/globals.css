@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind variants;
 @tailwind utilities;
-
+/* 
 @layer base {
   .sleek {
     @apply max-w-full text-white bg-black;
@@ -75,13 +75,10 @@
       @apply flex flex-col;
 
       .id {
-        /* @apply; */
       }
       .owner {
-        /* @apply; */
       }
       .price {
-        /* @apply; */
       }
     }
   }
@@ -97,19 +94,15 @@
       @apply flex flex-col justify-center w-1/2;
 
       .id {
-        /* @apply; */
       }
 
       .bid {
-        /* @apply; */
       }
 
       .bidder {
-        /* @apply; */
       }
 
       .timeleft {
-        /* @apply ; */
       }
     }
   }
@@ -154,7 +147,6 @@
     }
 
     .timeleft {
-      /* @apply ; */
     }
   }
 
@@ -294,4 +286,4 @@
       @apply rounded-lg;
     }
   }
-}
+} */
