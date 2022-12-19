@@ -376,7 +376,6 @@ const getParsedContractURI = (dao: DAOShort): ParsedContractURI | undefined => {
 const getActiveAuction = async (
   dao: DAODetails
 ): Promise<Auction | undefined> => {
-  console.log(dao.tokenContract.totalSupply, 1);
   try {
     const { auction } = await request(SUBGRAPH_URL, GET_AUCTION_DETAILS, {
       auctionId: `${dao.auctionContract.id}-${
@@ -384,10 +383,9 @@ const getActiveAuction = async (
       }`,
     });
 
-    console.log({ auction });
     return auction;
   } catch (error) {
-    console.log(error);
+    console.log({ error });
   }
 };
 
