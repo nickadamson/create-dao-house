@@ -27,14 +27,16 @@ const TokenCard = ({ token, onClick, children }: Props) => {
         <h4 className="">
           {token.tokenContract.name} #{token.tokenId}
         </h4>
-        <span className="">
-          Owned by:
-          <br />
-          <a href={`https://etherscan.io/address/${token.owner?.id}`}>
-            {' '}
-            {toTrimmedAddress(token.owner?.id)}
-          </a>
-        </span>
+        {token?.owner && (
+          <span className="">
+            Owned by:
+            <br />
+            <a href={`https://etherscan.io/address/${token.owner?.id}`}>
+              {' '}
+              {toTrimmedAddress(token.owner?.id)}
+            </a>
+          </span>
+        )}
       </div>
     </Card>
   );
