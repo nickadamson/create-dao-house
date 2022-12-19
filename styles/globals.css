@@ -5,14 +5,16 @@
 
 @layer base {
   .sleek {
-    @apply text-white bg-black;
+    @apply max-w-full text-white bg-black;
 
     .landing-title {
       @apply mb-4 text-7xl text-center;
     }
+
     .landing-desc {
-      @apply text-5xl italic text-center;
+      @apply py-12 text-5xl italic text-center;
     }
+
     .footer {
       @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
@@ -26,6 +28,7 @@
     .landing-desc {
       @apply text-5xl text-center;
     }
+
     .footer {
       @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
