@@ -29,19 +29,8 @@ const Navigation = () => {
           </NavigationMenu.Sub>
           {/* wallet */}
           <NavigationMenu.Item className="flex justify-end">
-            <ConnectButton />
-            {isConnected && <Account />}
+            {isConnected ? <Account /> : <ConnectButton />}
           </NavigationMenu.Item>
-
-          {/* <NavigationMenu.Item className='border border-red-500 border-solid'> */}
-          {/* <NavigationMenu.Trigger className='border border-red-500 border-solid' /> */}
-          {/* <NavigationMenu.Content className='border border-red-500 border-solid'> */}
-          {/* <NavigationMenu.Sub className='border border-red-500 border-solid'> */}
-          {/* <NavigationMenu.List className='border border-red-500 border-solid' /> */}
-          {/* <NavigationMenu.Viewport className='border border-red-500 border-solid' /> */}
-          {/* </NavigationMenu.Sub> */}
-          {/* </NavigationMenu.Content> */}
-          {/* </NavigationMenu.Item> */}
           <NavigationMenu.Indicator className="" />
         </div>
       </NavigationMenu.List>

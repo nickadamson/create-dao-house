@@ -202,6 +202,10 @@ const AUCTION_DETAILS_FRAGMENT = gql`
     winner {
       id
     }
+    auctionContract {
+      id
+      minBidIncrement
+    }
   }
 
   ${TOKEN_DETAILS_FRAGMENT}

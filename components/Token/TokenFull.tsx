@@ -13,7 +13,6 @@ interface Props extends PropsWithChildren {
 const TokenFull = ({ token, children }: Props) => {
   const imgUrl = getTokenImageURL(token);
 
-  // console.log({ token });
   return (
     <div className="token-full">
       <div className="img">
