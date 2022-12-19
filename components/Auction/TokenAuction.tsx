@@ -35,16 +35,12 @@ const TokenAuction = ({ auction, children }: Props) => {
   );
 
   const currentHighestBid = orderedBids[orderedBids.length - 1]?.amount;
-  // console.log({ currentHighestBid });
 
   const minBidFactor = Number(`1.${auction.auctionContract.minBidIncrement}`);
-  // console.log({ minBidFactor });
 
   const minBid = Number(formatEther(currentHighestBid)) * minBidFactor;
 
-  // console.log(auction.auctionContract);
   const [bidValue, setBidValue] = useState(minBid);
-  // console.log({ bidValue });
 
   const { config, error } = usePrepareContractWrite({
     address: auction.auctionContract.id,
