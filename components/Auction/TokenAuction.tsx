@@ -4,6 +4,7 @@ import { PropsWithChildren } from 'react';
 import { useAccount } from 'wagmi';
 
 import { Auction } from '../../data/nouns-builder-graph-types';
+import { useCountdown } from '../../hooks/useCountdown';
 import { getTokenImageURL } from '../../utils/decoding';
 
 interface Props extends PropsWithChildren {
@@ -19,6 +20,8 @@ const TokenAuction = ({ auction, children }: Props) => {
   const orderedBids = auction.bids.sort(
     (a, z) => a.blockTimestamp - z.blockTimestamp
   );
+
+  const { countdownText } = useCountdown(auction.startTime, auction.endTime);
 
   return (
     <div className="auction-wrapper">
@@ -44,6 +47,7 @@ const TokenAuction = ({ auction, children }: Props) => {
             Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
           </span>
         )}
+        <span className="timeleft">{countdownText}</span>
       </div>
     </div>
   );

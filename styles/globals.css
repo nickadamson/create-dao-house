@@ -110,6 +110,10 @@
       .bidder {
         /* @apply; */
       }
+
+      .timeleft {
+        /* @apply ; */
+      }
     }
   }
 
@@ -210,6 +214,14 @@
 
     .token-card {
       @apply text-white bg-black;
+    }
+
+    .auction-wrapper {
+      .details {
+        .timeleft {
+          @apply text-gray-50 text-opacity-90;
+        }
+      }
     }
 
     .proposal-card {
