@@ -30,6 +30,7 @@ const TokenAuction = ({ auction, children }: Props) => {
           height={320}
         />
       </div>
+      {/* TODO: MAKEBID */}
       <div className="details">
         <h4 className="id">#{auction.token?.tokenId}</h4>
         <span className="bid">
