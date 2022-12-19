@@ -1,12 +1,13 @@
 # Create DAO House
 
-A repo to bootstrap your own permission-less DAO. This template will get you started with the display of any Erc721 token collection with the inclusion of web3 components so users can connect their wallets and manage NFT's that they own within a specified collection.
+A repo to bootstrap your Nouns Builder DAO's website.
 
 ## Features
 
-1. uses [NextJS](https://nextjs.org/)
+1. uses [NextJS](https://nextjs.org/); Server-Side Rendering
 2. uses `Typescript`
-3. uses [Tailwind](https://tailwindcss.com/)
+3. uses [Tailwind](https://tailwindcss.com/) for styling
+4. uses [wagmi](https://wagmi.sh/) + [rainbowkit](https://www.rainbowkit.com/)
 
 ## Getting Started
 
@@ -41,6 +42,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+You can start editing the styling by modifying `styles/globals.css`. More detailed guide coming soon.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
@@ -49,6 +52,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Or click the button below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fourzora%2Fcreate-auction-house&env=NEXT_PUBLIC_APP_TITLE,NEXT_PUBLIC_BASE_URL,NEXT_PUBLIC_NETWORK,NEXT_PUBLIC_CURATORS_ID&envDescription=Curator%20ID%20%26%20Network&envLink=https%3A%2F%2Fgithub.com%2Fourzora%2Fauction-house%23curators&project-name=our-auction-house&repo-name=our-auction-house&redirect-url=https%3A%2F%2Fcreate-auction-house.vercel.app)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fnickadamson%2Fcreate-dao-house&env=NEXT_PUBLIC_ALCHEMY_API_KEY,NEXT_PUBLIC_INFURA_API_KEY,NEXT_PUBLIC_DAO_TOKEN_ADDRESS,NEXT_PUBLIC_THEME_STYLE&project-name=our-dao-house&repo-name=our-dao-house&redirect-url=https%3A%2F%2Fcreate-dao-house.vercel.app)
 
 ...Don't forget to add the necessary environment variables!
