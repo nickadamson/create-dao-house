@@ -8,7 +8,7 @@ export function Account() {
 
   return (
     <p className="flex flex-col justify-center" onClick={() => disconnect()}>
-      {ensName ?? address}
+      {ensName ?? toTrimmedAddress(address)}
       <br />
       {ensName ? ` (${toTrimmedAddress(address)})` : null}
     </p>
