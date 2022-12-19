@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import { FC, useState, useRef, useEffect, forwardRef } from 'react';
+import cx from 'classnames';
+
+import { useThemedStyles } from '../hooks/useThemedStyles';
+import { ComponentStyles } from '../utils/getThemedStyles';
 
 import Button from './Button';
 import { CloseIcon, HamburgerIcon } from './Icons';
@@ -7,58 +11,73 @@ import Logo from './Logo';
 
 interface MenuProps {
   closeMenu: () => void;
+  themed: Partial<ComponentStyles>;
 }
 
-const Menu = forwardRef<HTMLDivElement, MenuProps>(({ closeMenu }, ref) => (
-  <div
-    className="fixed top-0 bottom-0 left-0 w-60 max-w-[80%] hamburger-menu bg-white"
-    ref={ref}
-  >
-    <Button
-      buttonType="button"
-      onClick={() => closeMenu()}
-      className="absolute top-5 left-5"
+const styles = {
+  modern: {
+    menu: 'border border-black',
+  },
+  sleek: {},
+  nouns: {},
+};
+
+const Menu = forwardRef<HTMLDivElement, MenuProps>(
+  ({ closeMenu, themed }, ref) => (
+    <div
+      className={cx(
+        'fixed top-0 bottom-0 left-0 w-60 max-w-[80%] bg-white'
+        // themed.menu
+      )}
+      ref={ref}
     >
-      <CloseIcon />
-    </Button>
-    <div className="flex flex-col w-full h-full pt-12 text-lg">
-      <Link
-        href="/"
-        className="flex justify-center h-24"
+      <Button
+        buttonType="button"
         onClick={() => closeMenu()}
+        className="absolute top-5 left-5"
       >
-        <Logo className="hamburger-logo" />
-      </Link>
-      <Link
-        href="/"
-        className="flex justify-center h-24 border-t border-black"
-        onClick={() => closeMenu()}
-      >
-        <span className="self-center">Home</span>
-      </Link>
-      <Link
-        href="/vote"
-        className="flex justify-center h-24 border-t border-black"
-        onClick={() => closeMenu()}
-      >
-        <span className="self-center">Vote</span>
-      </Link>
-      <Link
-        href="/tokens"
-        className="flex justify-center h-24 border-t border-black"
-        onClick={() => closeMenu()}
-      >
-        <span className="self-center">Tokens</span>
-      </Link>
+        <CloseIcon />
+      </Button>
+      <div className="flex flex-col w-full h-full pt-12 text-lg">
+        <Link
+          href="/"
+          className="flex justify-center h-24"
+          onClick={() => closeMenu()}
+        >
+          <Logo className="hamburger-logo" />
+        </Link>
+        <Link
+          href="/"
+          className="flex justify-center h-24 border-t border-black"
+          onClick={() => closeMenu()}
+        >
+          <span className="self-center">Home</span>
+        </Link>
+        <Link
+          href="/vote"
+          className="flex justify-center h-24 border-t border-black"
+          onClick={() => closeMenu()}
+        >
+          <span className="self-center">Vote</span>
+        </Link>
+        <Link
+          href="/tokens"
+          className="flex justify-center h-24 border-t border-black"
+          onClick={() => closeMenu()}
+        >
+          <span className="self-center">Tokens</span>
+        </Link>
+      </div>
     </div>
-  </div>
-));
+  )
+);
 
 Menu.displayName = 'Menu';
 
 const Hamburger: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const themed = useThemedStyles(styles);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -78,7 +97,13 @@ const Hamburger: FC = () => {
       <Button className="fixed top-5 left-5" onClick={() => setIsOpen(!isOpen)}>
         <HamburgerIcon />
       </Button>
-      {isOpen && <Menu ref={menuRef} closeMenu={() => setIsOpen(false)} />}
+      {isOpen && (
+        <Menu
+          ref={menuRef}
+          closeMenu={() => setIsOpen(false)}
+          themed={themed}
+        />
+      )}
     </>
   );
 };

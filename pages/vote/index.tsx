@@ -17,7 +17,7 @@ export default function Vote({
   return (
     <>
       {/* DAO title */}
-      <div className="page-title">Governance</div>
+      <div className="mx-auto my-4 text-xl text-center">Governance</div>
       {/* proposals */}
 
       {gov.proposals.map((proposal) => {

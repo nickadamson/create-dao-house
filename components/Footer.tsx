@@ -27,7 +27,7 @@ const Footer: FC = () => {
   }, [theme, dispatch]);
 
   return (
-    <div className="footer">
+    <div className="flex items-center justify-center w-full h-12 text-center border-t">
       {isLocalHost() && (
         <Button
           onClick={toggleTheme}
@@ -39,3 +39,15 @@ const Footer: FC = () => {
 };
 
 export default Footer;
+
+// const modernStyles = {
+//   footer: 'flex items-center justify-center w-full h-12 text-center border-t',
+// };
+
+// const nounsStyles = {
+//   footer: 'flex items-center justify-center w-full h-12 text-center border-t',
+// };
+
+// const sleekStyles = {
+//   footer: 'flex items-center justify-center w-full h-12 text-center border-t',
+// };

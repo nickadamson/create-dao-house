@@ -15,11 +15,11 @@ const TokenFull = ({ token, children }: Props) => {
 
   // console.log({ token });
   return (
-    <div className="token-full">
-      <div className="img">
+    <div className="flex items-center justify-center gap-6 w-full h-full min-h-[80vh]">
+      <div className="relative h-[50vh] w-[50vh] my-auto">
         {imgUrl && <Image src={imgUrl} alt={'Token #' + token.tokenId} fill />}
       </div>
-      <div className="details">
+      <div className="flex flex-col">
         <h4 className="id">#{token.tokenId}</h4>
         {token.auction.settled ? (
           <>
@@ -27,7 +27,7 @@ const TokenFull = ({ token, children }: Props) => {
             <span className="price">
               Purchase Price:{' '}
               {formatEther(
-                token.auction?.winningBid?.amount ?? BigNumber.from(0)
+                token.auction.winningBid?.amount ?? BigNumber.from(0)
               )}
             </span>
           </>
