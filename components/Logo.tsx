@@ -1,17 +1,21 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import cx from 'classnames';
 
 import { useDataStore } from '../hooks/useDataStore';
-import logo from '../public/logo.svg';
 
-const Logo = () => {
+interface LogoProps {
+  className?: string;
+}
+
+const Logo: FC<LogoProps> = ({ className }) => {
   const { contractURI } = useDataStore();
   const [hidden, setHidden] = useState(false);
 
   return (
-    <div className="flex items-center">
+    <div className={cx('flex items-center', { className })}>
       <Image
-        className={`pr-2 ${hidden ? 'hidden' : ''}`}
+        className={cx('pr-2', { hidden })}
         src={contractURI.image}
         alt="logo"
         height={32}
