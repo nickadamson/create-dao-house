@@ -1,9 +1,10 @@
-import { formatEther } from 'ethers/lib/utils.js';
+import { formatEther, parseEther } from 'ethers/lib/utils.js';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 import { useAccount } from 'wagmi';
 
 import { Auction } from '../../data/nouns-builder-graph-types';
+import { useCountdown } from '../../hooks/useCountdown';
 import { getTokenImageURL } from '../../utils/decoding';
 
 interface Props extends PropsWithChildren {
@@ -20,9 +21,11 @@ const TokenAuction = ({ auction, children }: Props) => {
     (a, z) => a.blockTimestamp - z.blockTimestamp
   );
 
+  const { countdownText } = useCountdown(auction.startTime, auction.endTime);
+
   return (
-    <div className="flex p-12 m-8">
-      <div className="flex justify-center items-center w-1/2">
+    <div className="auction-wrapper">
+      <div className="img">
         <Image
           src={imgUrl}
           alt={'Token #' + auction.token?.tokenId}
@@ -30,14 +33,21 @@ const TokenAuction = ({ auction, children }: Props) => {
           height={320}
         />
       </div>
-      <div className="flex flex-col justify-center w-1/2">
-        <h4 className="">#{auction.token?.tokenId}</h4>
-        <span className="">
-          Current Bid: {formatEther(orderedBids[orderedBids.length - 1].amount)}
+      {/* TODO: MAKEBID */}
+      <div className="details">
+        <h4 className="id">#{auction.token?.tokenId}</h4>
+        <span className="bid">
+          Current Bid:{' '}
+          {formatEther(
+            orderedBids[orderedBids.length - 1]?.amount ?? parseEther('0')
+          )}
         </span>
-        <span className="">
-          Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
-        </span>
+        {orderedBids.length > 0 && (
+          <span className="bidder">
+            Bidder: {orderedBids[orderedBids.length - 1].bidder.id}
+          </span>
+        )}
+        <span className="timeleft">{countdownText}</span>
       </div>
     </div>
   );

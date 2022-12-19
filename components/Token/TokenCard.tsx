@@ -14,7 +14,7 @@ interface Props extends PropsWithChildren {
 const TokenCard = ({ token, onClick, children }: Props) => {
   const imgUrl = getTokenImageURL(token);
   return (
-    <Card className="token-card hover:cursor" onClick={() => onClick?.()}>
+    <Card className="token-card" onClick={() => onClick?.()}>
       {imgUrl && (
         <Image
           src={imgUrl}
@@ -27,14 +27,16 @@ const TokenCard = ({ token, onClick, children }: Props) => {
         <h4 className="">
           {token.tokenContract.name} #{token.tokenId}
         </h4>
-        <span className="">
-          Owned by:
-          <br />
-          <a href={`https://etherscan.io/address/${token.owner?.id}`}>
-            {' '}
-            {toTrimmedAddress(token.owner?.id)}
-          </a>
-        </span>
+        {token?.owner && (
+          <span className="">
+            Owned by:
+            <br />
+            <a href={`https://etherscan.io/address/${token.owner?.id}`}>
+              {' '}
+              {toTrimmedAddress(token.owner?.id)}
+            </a>
+          </span>
+        )}
       </div>
     </Card>
   );

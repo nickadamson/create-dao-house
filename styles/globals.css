@@ -8,11 +8,11 @@
     @apply max-w-full text-white bg-black;
 
     .landing-title {
-      @apply mb-4 text-center text-7xl;
+      @apply mb-4 text-7xl text-center;
     }
 
     .landing-desc {
-      @apply py-12 text-5xl italic text-center;
+      @apply text-5xl italic text-center;
     }
 
     .footer {
@@ -22,8 +22,9 @@
 
   .modern {
     @apply bg-gradient-to-bl from-gray-50 via-gray-100 to-gray-200;
+
     .landing-title {
-      @apply mb-4 text-center text-7xl;
+      @apply mb-4 text-7xl text-center;
     }
     .landing-desc {
       @apply text-5xl text-center;
@@ -36,54 +37,240 @@
 
   .nouns {
     @apply text-black bg-stone-100;
+
     .landing-title {
-      @apply mb-4 text-center text-7xl;
+      @apply mb-4 text-7xl text-center;
     }
+
     .landing-desc {
       @apply text-5xl text-center;
     }
+
     .footer {
       @apply flex justify-center items-center w-full h-12 text-center border-t;
     }
+  }
+
+  .landing-desc {
+    @apply py-12;
   }
 
   .nav-root {
     @apply flex justify-center w-full z-[1] text-center h-full max-h-16;
   }
 
+  .page-title {
+    @apply mx-auto my-4 text-xl text-center;
+  }
+
   .token-card {
-    @apply flex flex-col justify-between border border-gray-400 w-80;
+    @apply flex flex-col justify-between place-self-center h-full border border-gray-400 hover:cursor-pointer;
 
     .details {
-      @apply flex flex-col justify-between h-full px-3 py-2;
+      @apply flex flex-col justify-between px-3 py-2 h-full;
+    }
+  }
+
+  .token-grid {
+    @apply grid sm:gap-5 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .token-full {
+    @apply flex items-center justify-center gap-6 w-full h-full min-h-[80vh];
+
+    .img {
+      @apply relative h-[50vh] w-[50vh] my-auto;
+    }
+
+    .details {
+      @apply flex flex-col;
+
+      .id {
+        /* @apply; */
+      }
+      .owner {
+        /* @apply; */
+      }
+      .price {
+        /* @apply; */
+      }
+    }
+  }
+
+  .auction-wrapper {
+    @apply flex gap-8 p-12 m-8;
+
+    .img {
+      @apply flex justify-end items-center w-1/2;
+    }
+
+    .details {
+      @apply flex flex-col justify-center w-1/2;
+
+      .id {
+        /* @apply; */
+      }
+
+      .bid {
+        /* @apply; */
+      }
+
+      .bidder {
+        /* @apply; */
+      }
+
+      .timeleft {
+        /* @apply ; */
+      }
     }
   }
 
   .votes-wrapper {
-    @apply bg-gray-500 w-36 h-36;
+    @apply flex flex-col gap-4 justify-center p-4 w-fit h-fit min-w-[200px];
+
+    .ProgressRoot {
+      @apply overflow-hidden relative w-full h-6 bg-gray-400 rounded-full;
+    }
+
+    .ProgressIndicator {
+      @apply w-full h-full bg-gray-600 transition-transform duration-500 ease-in-out;
+    }
   }
 
   .proposal-card {
-    @apply justify-between w-full p-4 m-4;
+    @apply flex flex-col justify-between p-4 m-4 hover:cursor-pointer;
+
+    .details {
+      @apply flex justify-between w-full;
+
+      .title {
+        @apply w-full text-2xl;
+      }
+
+      .status {
+        @apply p-2 my-auto text-lg h-min;
+      }
+
+      .executed {
+        @apply bg-green-200;
+      }
+
+      .pending {
+        @apply bg-yellow-200;
+      }
+
+      .vetoed {
+        @apply bg-red-200;
+      }
+    }
+
+    .timeleft {
+      /* @apply ; */
+    }
   }
 
-  .proposal-status {
-    @apply p-2 h-min;
+  .proposal-full {
+    .status {
+      @apply p-2 my-auto text-lg h-min;
+    }
+
+    .executed {
+      @apply bg-green-200;
+    }
+
+    .pending {
+      @apply bg-yellow-200;
+    }
+
+    .vetoed {
+      @apply bg-red-200;
+    }
   }
 }
 
 @layer components {
   .sleek {
+    .token-grid {
+      @apply grid auto-cols-auto auto-rows-auto gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5;
+    }
+
+    .proposal-full {
+      .status {
+        @apply p-0 font-thin tracking-wider text-opacity-90 bg-transparent;
+      }
+
+      .executed {
+        @apply text-lime-300;
+      }
+
+      .pending {
+        @apply text-yellow-300;
+      }
+
+      .vetoed {
+        @apply text-red-300;
+      }
+    }
+
+    .votes-wrapper {
+      @apply text-center border border-white;
+
+      .ProgressRoot {
+        @apply bg-black border border-gray-700;
+      }
+
+      .ProgressIndicator {
+        @apply bg-white;
+      }
+    }
+
     .token-card {
       @apply text-white bg-black;
     }
 
-    .proposal-card {
-      @apply border-2 border-black rounded-sm;
+    .auction-wrapper {
+      .details {
+        .timeleft {
+          @apply text-gray-50 text-opacity-90;
+        }
+      }
     }
 
-    .proposal-status {
-      /* @apply ; */
+    .token-card {
+      @apply relative border-0;
+
+      .details {
+        @apply hidden absolute flex-col justify-center items-center place-self-center w-full h-full bg-black bg-opacity-40;
+      }
+    }
+    .token-card:hover {
+      .details {
+        @apply flex;
+      }
+    }
+
+    .proposal-card {
+      @apply p-4 mx-4 border border-white;
+
+      .status {
+        @apply justify-center p-0 w-1/6 font-thin tracking-wider text-center text-opacity-90 bg-transparent;
+      }
+
+      .executed {
+        @apply text-lime-300;
+      }
+
+      .pending {
+        @apply text-yellow-300;
+      }
+
+      .vetoed {
+        @apply text-red-300;
+      }
+    }
+
+    .timeleft {
+      @apply font-light text-gray-50 text-opacity-50;
     }
   }
 
@@ -93,7 +280,7 @@
     }
 
     .proposal-card {
-      @apply border border-black rounded-lg shadow-xl;
+      @apply rounded-lg border border-black shadow-xl;
     }
 
     .proposal-status {
@@ -111,7 +298,7 @@
     }
 
     .proposal-card {
-      @apply border border-black rounded-lg shadow-xl;
+      @apply rounded-lg border border-black shadow-xl;
     }
 
     .proposal-status {

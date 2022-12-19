@@ -29,7 +29,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
           className={`flex flex-col justify-between items-center w-screen min-h-screen ${theme}`}
         >
           {displayNav ? <Navigation /> : <Hamburger />}
-          <div className="flex-grow w-full px-5 py-5 max-w-7xl xl:px-0">
+          <div className="flex-grow px-5 py-5 max-w-7xl xl:px-0">
             {children}
           </div>
           <Footer />
