@@ -1,34 +1,57 @@
-# its-our-house-house-house
+# Create DAO House
 
-## vibe
-[![Video](https://img.youtube.com/vi/Bbdx9n2lOXo/maxresdefault.jpg)](https://www.youtube.com/watch?v=Bbdx9n2lOXo)
+A repo to bootstrap your Nouns Builder DAO's website.
 
-### init thoughts
+## Features
 
-- #### for styling we have a few choices. the reason I've selected these is because they seem to be the most common in the zora network of open source projects
-  - :confused: EmotionCSS: used in [@ourzora/nft-components](https://github.com/ourzora/nft-components) and a couple of their other projects, however....
-  - :eyes: Zord: @ourzora/zord is the new (or soon to be) official Zora UI library and is being used in [the nouns-marketplace repo](https://github.com/ourzora/nouns-marketplace). cons: its in alpha and theres no docs -- only a [playground](https://zord-playroom.vercel.app/). it seems to me like it will eventually be the best choice but I can't say for certain it is right now.
-  - :heart: Tailwind: I'll die on this hill but tailwind is the [dylan of css frameworks](https://www.youtube.com/watch?v=5HRY4LUl5lc)
-  
-- #### basic components:
-  - ##### first we need to get a big picture understanding of what a nounishDAO looks like
-    - here are two examples of custom websites off these daos
-      - [public---assembly aka ┅Ⓟ](https://www.public---assembly.com/)
-      - [PurpleDAO (focused around farcaster.xyz protocol)](https://purple.construction/)
-    - with those in mind, and going back to [https://nouns.build/](https://nouns.build/) you can see:
-      - there's a daily auction (or every x days auction, not important)
-        - winners/owners of the auctions vote on proposals
-          + really want to dial in on the community here, whether its ultra-custom styling for them, new ways to communicate, etc
-      - there's a classic <about> page
-      - nouns.build also has [treasury & proposal sections](https://nouns.build/dao/0xd2e7684cf3e2511cc3b4538bb2885dc206583076/8) underneath daily auction
-      - [nouns.market provides a grid view of daily auctiond along with some financial info](https://noun.market/collections/0xd2e7684cf3e2511cc3b4538bb2885dc206583076)
-    - there's no subgraph (GQL indexer of contract events)
-      - i'm on discord talking to someone I might be able to collab with on it but for now..
-        - example of the most [important types in context of discord/twitter bot](https://github.com/ourzora/nouns-builder-bot/blob/main/src/messages/twitter.ts)
-      - should've linked this earlier but [docs for smart contracts](https://docs.zora.co/docs/smart-contracts/nouns-builder/intro)
-      
-      
-### thats all for now, folks more to come
+1. uses [NextJS](https://nextjs.org/); Server-Side Rendering
+2. uses `Typescript`
+3. uses [Tailwind](https://tailwindcss.com/) for styling
+4. uses [wagmi](https://wagmi.sh/) + [rainbowkit](https://www.rainbowkit.com/)
 
+## Getting Started
 
-## oh the gold standard is [https://github.com/ourzora/create-auction-house](https://github.com/ourzora/create-auction-house) this is a custom template for auction houses, we want same architecture
+The application accepts the below environment variables, you WILL need to specify the network ID along with either a Curator ID or a Contract Address:
+
+### ENV VARS:
+
+```bash
+NEXT_PUBLIC_ALCHEMY_API_KEY=
+NEXT_PUBLIC_INFURA_API_KEY=
+
+# token contract address
+NEXT_PUBLIC_DAO_TOKEN_ADDRESS=
+
+# nouns | modern | sleek
+NEXT_PUBLIC_THEME_STYLE=
+
+# OPTIONAL - leave blank to use DAO Name according to smart contracts
+NEXT_PUBLIC_NAVBAR_TITLE=
+
+```
+
+## Develop
+
+First, run the development server:
+
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+You can start editing the styling by modifying `styles/globals.css`. More detailed guide coming soon.
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Or click the button below:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fnickadamson%2Fcreate-dao-house&env=NEXT_PUBLIC_ALCHEMY_API_KEY,NEXT_PUBLIC_INFURA_API_KEY,NEXT_PUBLIC_DAO_TOKEN_ADDRESS,NEXT_PUBLIC_THEME_STYLE&project-name=our-dao-house&repo-name=our-dao-house&redirect-url=https%3A%2F%2Fcreate-dao-house.vercel.app)
+
+...Don't forget to add the necessary environment variables!
