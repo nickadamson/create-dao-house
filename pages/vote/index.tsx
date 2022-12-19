@@ -8,7 +8,6 @@ import { ParsedContractURI } from '../../utils/decoding';
 
 export default function Vote({
   gov,
-  contractURI,
 }: {
   gov: GovernorContract;
   contractURI: ParsedContractURI;
@@ -18,7 +17,7 @@ export default function Vote({
   return (
     <>
       {/* DAO title */}
-      <div className="page-title">{contractURI.name} Governance</div>
+      <div className="page-title">Governance</div>
       {/* proposals */}
 
       {gov.proposals.map((proposal) => {
