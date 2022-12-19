@@ -2,11 +2,13 @@ import { FC, useState, useRef, useEffect, LegacyRef } from 'react';
 
 import Button from './Button';
 
-const Menu: FC<{ ref: LegacyRef<HTMLDivElement> | null }> = ({ ref }) => {
+const Menu: FC<{ menuRef: LegacyRef<HTMLDivElement> | null }> = ({
+  menuRef,
+}) => {
   return (
     <div
       className="fixed top-0 bottom-0 left-0 w-60 max-w-[80%] bg-green-400"
-      ref={ref}
+      ref={menuRef}
     ></div>
   );
 };
@@ -49,7 +51,7 @@ const Hamburger: FC = () => {
           />
         </svg>
       </Button>
-      {isOpen && <Menu ref={menuRef} />}
+      {isOpen && <Menu menuRef={menuRef} />}
     </>
   );
 };
