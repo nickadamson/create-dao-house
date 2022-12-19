@@ -32,8 +32,10 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
           className={`flex flex-col justify-between items-center w-screen min-h-screen ${theme}`}
         >
           {displayNav ? <Navigation /> : <Hamburger />}
-          <div className="flex-grow px-5 py-5 max-w-7xl xl:px-0">
-            <h1 className="pt-8 pb-12 mb-4 text-center text-7xl">{name}</h1>
+          <div className="flex-grow px-5 py-5 w-full max-w-7xl xl:px-0">
+            {!displayNav && (
+              <h1 className="pt-8 pb-12 mb-4 text-7xl text-center">{name}</h1>
+            )}
             {children}
           </div>
           <Footer />
