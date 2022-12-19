@@ -21,13 +21,20 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({ closeMenu }, ref) => (
     >
       <CloseIcon />
     </Button>
-    <div className="flex flex-col w-full h-full pt-8 text-lg">
+    <div className="flex flex-col w-full h-full pt-12 text-lg">
       <Link
         href="/"
         className="flex justify-center h-24"
         onClick={() => closeMenu()}
       >
         <Logo className="hamburger-logo" />
+      </Link>
+      <Link
+        href="/"
+        className="flex justify-center h-24 border-t border-black"
+        onClick={() => closeMenu()}
+      >
+        <span className="self-center">Home</span>
       </Link>
       <Link
         href="/vote"
