@@ -15,9 +15,14 @@ export default function Tokens({
   contractURI: ParsedContractURI;
 }) {
   const router = useRouter();
+
+  const orderedTokens = tokens.sort(
+    (a, z) => Number(z.tokenId) - Number(a.tokenId)
+  );
+
   return (
     <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      {tokens.map((token) => (
+      {orderedTokens.map((token) => (
         <TokenCard
           key={token.id}
           token={token}
