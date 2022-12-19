@@ -1,17 +1,20 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useCallback } from 'react';
+import { useAccount } from 'wagmi';
 
 import { useDataStore } from '../hooks/useDataStore';
 import { useTheme } from '../hooks/useTheme';
 import { Theme } from '../types';
 import { isLocalHost } from '../utils/isLocalHost';
+import { Account } from './Account';
 
 import Button from './Button';
 import Logo from './Logo';
 import NavigationLink from './NavigationLink';
 
 const Navigation = () => {
+  const { isConnected } = useAccount();
   const { dispatch } = useDataStore();
   const theme = useTheme();
 
@@ -59,6 +62,7 @@ const Navigation = () => {
           {/* wallet */}
           <NavigationMenu.Item className="w-48">
             <ConnectButton />
+            {isConnected && <Account />}
           </NavigationMenu.Item>
 
           {/* <NavigationMenu.Item className='border border-red-500 border-solid'> */}

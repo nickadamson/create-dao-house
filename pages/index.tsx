@@ -1,10 +1,8 @@
 import { GetServerSidePropsResult } from 'next';
-import { useAccount } from 'wagmi';
 import Image from 'next/image';
 
-import { Account } from '../components/Account';
 import { DAODetails, getDAODetails } from '../data/subgraph';
-import { parseContractURI, ParsedContractURI } from '../utils/decoding';
+import { ParsedContractURI } from '../utils/decoding';
 import { ipfsImage } from '../utils/string';
 
 export default function Home({
@@ -19,7 +17,6 @@ export default function Home({
   const { name, description, image } = contractURI;
   return (
     <>
-      {isConnected && <Account />}
       <h1 className="landing-title">{name}</h1>
       <h2 className="landing-desc">{description}</h2>
       <Image alt="dao image" src={ipfsImage(image)} height={100} width={100} />
