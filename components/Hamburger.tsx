@@ -1,17 +1,49 @@
-import { FC, useState, useRef, useEffect, LegacyRef } from 'react';
+import Link from 'next/link';
+import { FC, useState, useRef, useEffect, forwardRef } from 'react';
 
 import Button from './Button';
+import { CloseIcon, HamburgerIcon } from './Icons';
+import Logo from './Logo';
 
-const Menu: FC<{ menuRef: LegacyRef<HTMLDivElement> | null }> = ({
-  menuRef,
-}) => {
-  return (
-    <div
-      className="fixed top-0 bottom-0 left-0 w-60 max-w-[80%] bg-green-400"
-      ref={menuRef}
-    ></div>
-  );
-};
+interface MenuProps {
+  closeMenu: () => void;
+}
+
+const Menu = forwardRef<HTMLDivElement, MenuProps>(({ closeMenu }, ref) => (
+  <div
+    className="fixed top-0 bottom-0 left-0 w-60 max-w-[80%] hamburger-menu bg-white"
+    ref={ref}
+  >
+    <Button buttonType="button" onClick={() => closeMenu()}>
+      <CloseIcon />
+    </Button>
+    <div className="flex flex-col w-full h-full text-lg">
+      <Link
+        href="/"
+        className="flex justify-center h-24"
+        onClick={() => closeMenu()}
+      >
+        <Logo className="hamburger-logo" />
+      </Link>
+      <Link
+        href="/vote"
+        className="flex justify-center h-24 border-t border-black"
+        onClick={() => closeMenu()}
+      >
+        <span className="self-center">Vote</span>
+      </Link>
+      <Link
+        href="/tokens"
+        className="flex justify-center h-24 border-t border-black"
+        onClick={() => closeMenu()}
+      >
+        <span className="self-center">Tokens</span>
+      </Link>
+    </div>
+  </div>
+));
+
+Menu.displayName = 'Menu';
 
 const Hamburger: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,26 +64,10 @@ const Hamburger: FC = () => {
 
   return (
     <>
-      <Button
-        className="fixed bg-red-600 lg:left-36"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
+      <Button className="fixed lg:left-36" onClick={() => setIsOpen(!isOpen)}>
+        <HamburgerIcon />
       </Button>
-      {isOpen && <Menu menuRef={menuRef} />}
+      {isOpen && <Menu ref={menuRef} closeMenu={() => setIsOpen(false)} />}
     </>
   );
 };
