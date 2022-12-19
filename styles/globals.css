@@ -8,7 +8,7 @@
     @apply text-white bg-black;
 
     .landing-title {
-      @apply mb-4 text-7xl text-center;
+      @apply mb-4 text-center text-7xl;
     }
     .landing-desc {
       @apply text-5xl italic text-center;
@@ -18,7 +18,7 @@
   .modern {
     @apply bg-gradient-to-bl from-gray-50 via-gray-100 to-gray-200;
     .landing-title {
-      @apply mb-4 text-7xl text-center;
+      @apply mb-4 text-center text-7xl;
     }
     .landing-desc {
       @apply text-5xl text-center;
@@ -28,7 +28,7 @@
   .nouns {
     @apply text-black bg-stone-100;
     .landing-title {
-      @apply mb-4 text-7xl text-center;
+      @apply mb-4 text-center text-7xl;
     }
     .landing-desc {
       @apply text-5xl text-center;
@@ -40,19 +40,19 @@
   }
 
   .token-card {
-    @apply flex flex-col justify-between w-80 border border-gray-400;
+    @apply flex flex-col justify-between border border-gray-400 w-80;
 
     .details {
-      @apply flex flex-col justify-between px-3 py-2 h-full;
+      @apply flex flex-col justify-between h-full px-3 py-2;
     }
   }
 
   .votes-wrapper {
-    @apply w-36 h-36 bg-gray-500;
+    @apply bg-gray-500 w-36 h-36;
   }
 
   .proposal-card {
-    @apply justify-between p-4 m-4 w-full;
+    @apply justify-between w-full p-4 m-4;
   }
 
   .proposal-status {
@@ -67,7 +67,7 @@
     }
 
     .proposal-card {
-      @apply rounded-sm border-2 border-black;
+      @apply border-2 border-black rounded-sm;
     }
 
     .proposal-status {
@@ -81,11 +81,15 @@
     }
 
     .proposal-card {
-      @apply rounded-lg border border-black shadow-xl;
+      @apply border border-black rounded-lg shadow-xl;
     }
 
     .proposal-status {
       @apply rounded-md;
+    }
+
+    .hamburger-menu {
+      @apply border border-black;
     }
   }
 
@@ -95,7 +99,7 @@
     }
 
     .proposal-card {
-      @apply rounded-lg border border-black shadow-xl;
+      @apply border border-black rounded-lg shadow-xl;
     }
 
     .proposal-status {
