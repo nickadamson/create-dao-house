@@ -5,6 +5,7 @@ import Navigation from '../Navigation';
 import Footer from '../Footer';
 import { useTheme } from '../../hooks/useTheme';
 import Hamburger from '../Hamburger';
+import { useDataStore } from '../../hooks/useDataStore';
 
 import FontWrapper from './Fonts/FontWrapper';
 
@@ -14,7 +15,9 @@ interface RootLayoutProps {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   const theme = useTheme();
-
+  const {
+    contractURI: { name },
+  } = useDataStore();
   const displayNav = theme === 'sleek';
   return (
     <>
@@ -30,6 +33,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
         >
           {displayNav ? <Navigation /> : <Hamburger />}
           <div className="flex-grow px-5 py-5 max-w-7xl xl:px-0">
+            <h1 className="landing-title">{name}</h1>
             {children}
           </div>
           <Footer />

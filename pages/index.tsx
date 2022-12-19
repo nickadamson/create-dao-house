@@ -8,7 +8,6 @@ import { Auction } from '../data/nouns-builder-graph-types';
 import TokenAuction from '../components/Auction/TokenAuction';
 
 export default function Home({
-  daoDetails,
   activeAuction,
   contractURI,
 }: {
@@ -16,10 +15,9 @@ export default function Home({
   activeAuction: Auction;
   contractURI: ParsedContractURI;
 }) {
-  const { name, description, image } = contractURI;
+  const { description, image } = contractURI;
   return (
     <>
-      <h1 className="landing-title">{name}</h1>
       {/* Daily Auction */}
       <TokenAuction auction={activeAuction} />
       {/* Contract Image */}
