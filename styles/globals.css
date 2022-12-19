@@ -12,7 +12,7 @@
     }
 
     .landing-desc {
-      @apply py-12 text-5xl italic text-center;
+      @apply text-5xl italic text-center;
     }
 
     .footer {
@@ -51,6 +51,10 @@
     }
   }
 
+  .landing-desc {
+    @apply py-12;
+  }
+
   .nav-root {
     @apply flex justify-center w-full z-[1] text-center h-full max-h-16;
   }
@@ -60,11 +64,15 @@
   }
 
   .token-card {
-    @apply flex flex-col justify-between w-80 border border-gray-400 hover:cursor-pointer;
+    @apply flex flex-col justify-between place-self-center h-full border border-gray-400 hover:cursor-pointer;
 
     .details {
       @apply flex flex-col justify-between px-3 py-2 h-full;
     }
+  }
+
+  .token-grid {
+    @apply grid sm:gap-5 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4;
   }
 
   .token-full {
@@ -182,6 +190,10 @@
 
 @layer components {
   .sleek {
+    .token-grid {
+      @apply grid auto-cols-auto auto-rows-auto gap-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5;
+    }
+
     .proposal-full {
       .status {
         @apply p-0 font-thin tracking-wider text-opacity-90 bg-transparent;
@@ -221,6 +233,19 @@
         .timeleft {
           @apply text-gray-50 text-opacity-90;
         }
+      }
+    }
+
+    .token-card {
+      @apply relative border-0;
+
+      .details {
+        @apply hidden absolute flex-col justify-center items-center place-self-center w-full h-full bg-black bg-opacity-40;
+      }
+    }
+    .token-card:hover {
+      .details {
+        @apply flex;
       }
     }
 

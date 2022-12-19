@@ -21,7 +21,7 @@ export default function Tokens({
   );
 
   return (
-    <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+    <div className="token-grid">
       {orderedTokens.map((token) => (
         <TokenCard
           key={token.id}
