@@ -1,5 +1,7 @@
 # Create DAO House
 
+![gif](./public/template.gif)
+
 A repo to bootstrap your Nouns Builder DAO's website.
 
 ## Features
