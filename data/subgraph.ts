@@ -165,6 +165,14 @@ const TOKEN_DETAILS_FRAGMENT = gql`
     tokenURI
     auction {
       id
+      winningBid {
+        amount
+        extended
+        blockTimestamp
+        bidder {
+          id
+        }
+      }
     }
     owner {
       id
